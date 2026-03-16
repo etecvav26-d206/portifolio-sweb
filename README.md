@@ -38,7 +38,3 @@ O objetivo é registrar os projetos criados pelo grupo e praticar conceitos fund
 * **PHP**
 
 ---
-
-<p align="center">
-Feito com 💙 pelo grupo de Sistemas Web
-</p>
