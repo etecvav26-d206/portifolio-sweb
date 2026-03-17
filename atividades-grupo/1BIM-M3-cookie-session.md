@@ -5,7 +5,7 @@
 | Nome | GitHub | Exercício |
 |------|--------|-----------|
 | Nome do Aluno 1 | @usuario1 | Exercício 1 |
-| Nome do Aluno 2 | @usuario2 | Exercício 2 |
+| Otávio Giovanelli Biazzi | @OtavioBiazzi | Exercício 2 |
 | Pedro Henrique Miranda | @M1randaPHM | Exercício 3 |
 | Nome do Aluno 4 | @usuario4 | Exercício 4 |
 
