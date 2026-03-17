@@ -49,6 +49,7 @@ Ao atualizar a página a mensagem muda para "Valor do cookie: 1". Como o navegad
 Ao abrir as ferramentas de desenvolvedor (na aba Application > Cookies), é possível visualizar o cookie armazenado. Confirma-se que o seu Nome é contador, o Valor é 1, e é possível notar também que sua Data de Expiração está definida para 1 hora no futuro (devido ao time()+3600).
 
 Ao apagar o cookie manualmente e atualizar a página, o ciclo se reinicia. Como o navegador não tem mais o cookie salvo para enviar ao servidor, a variável $_COOKIE["contador"] volta a ficar vazia, exibindo novamente a mensagem "Cookie ainda não disponível.".
+
 Por que o cookie não aparece imediatamente na primeira execução?
 
 O cookie não aparece na primeira execução devido à forma como a comunicação HTTP funciona.
