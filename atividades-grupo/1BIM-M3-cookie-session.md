@@ -25,14 +25,48 @@
 
 ## Exercício 2 — Pergunta de aplicação
 
-**Responsável:** Nome do Aluno 2
+**Responsável:** Otávio Giovanelli Biazzi
 
 **Pergunta:** Como cookies e sessions poderiam ser utilizados em uma loja virtual?
 
 **Resposta:**
 
-(escreva aqui sua resposta entre 5 e 10 linhas)
+ COOKIES E SESSIONS EM UMA LOJA VIRTUAL
 
+ Cookies
+
+Cookies são armazenados no navegador do usuário e são pequenos dados salvos no próprio navegador.
+
+Em uma loja virtual, eles podem ser utilizados das seguintes formas:
+
+- Manter o usuário logado
+  Quando o cliente faz login, um cookie pode guardar um identificador, para que ele não precise fazer login toda hora.
+
+- Salvar preferências
+  Idioma (português/inglês), tema (claro/escuro) e produtos visualizados recentemente.
+
+- Carrinho de compras  
+  Armazenar os itens do carrinho colocados pelo usuário, para que, mesmo que ele feche e abra o site, os produtos continuem guardados.
+
+- Marketing  
+  Saber quais produtos o usuário mais busca e, assim, mostrar anúncios personalizados depois.
+
+
+ Sessions
+
+As sessions guardam dados no servidor, e o cliente recebe apenas um ID (geralmente por meio de um cookie).
+
+- Controle de login  
+  Quando o usuário faz login, o servidor cria uma sessão e guarda dados como ID do usuário e permissões. Assim, o navegador armazena só o ID da sessão, deixando o processo mais seguro.
+
+- Carrinho de compras 
+  Os produtos ficam armazenados na sessão do servidor. Assim, mesmo que o usuário navegue entre as páginas, os itens do carrinho continuam lá.
+
+- Processo de compra
+  Guarda dados temporários, como endereço e forma de pagamento, evitando que o usuário perca informações ao mudar de página.
+
+- Controle de acesso 
+  Por exemplo, apenas usuários logados conseguem acessar a parte de “Meus pedidos”.
 ---
 
 ## Exercício 3 — Pergunta de investigação
