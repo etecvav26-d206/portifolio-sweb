@@ -1,6 +1,6 @@
 <!--
-Data: 02/03/2026
-Autor: Otávio Giovanelli Biazzi
+Data: 02/03/2026 
+Autor: Otávio Giovanelli Biazzi e Pedro Henrique Miranda
 Objetivo:
 
 Exercício 8 - Soma de 0 até N com Função
