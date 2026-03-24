@@ -1,6 +1,6 @@
 <!--
 Data: 02/03/2026
-Autor: Otávio Giovanelli Biazzi
+Autor: Otávio Giovanelli Biazzi e Pedro Henrique Miranda
 Objetivo:
 
 Exercício 4 - Triângulo Numérico
