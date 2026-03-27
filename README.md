@@ -14,7 +14,7 @@ Repositório dedicado ao desenvolvimento e envio de <strong>exercícios e projet
 
 * **Otávio Giovanelli Biazzi**
 * **Pedro Henrique Miranda**
-* **Laura**
+* **Laura Cristina Gonçalves da Cruz**
 * **Pedro Godoi**
 
 ---
