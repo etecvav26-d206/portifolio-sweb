@@ -12,7 +12,7 @@
 ---
 
 ## Exercício 1 — Pergunta conceitual
-#Responsável: Pedro Henrique Dalle Molle Godoi
+# Responsável: Pedro Henrique Dalle Molle Godoi
 
 ## Diferença entre Cookies e Sessions no PHP
 
