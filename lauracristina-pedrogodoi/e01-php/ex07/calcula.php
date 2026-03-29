@@ -1,7 +1,7 @@
 <?php
 /**
  * Data: 26/03/2026
- * Autor: Pedro Godoi e Laura Cristina Cruz
+ * Autor: Pedro Godoi e Laura Cristina Gonçalves da cruz
  * Objetivo:
  * Exercício 7 - Separar Positivos e Negativos
  * Separação de 8 números inteiros em vetores de positivos e negativos.
