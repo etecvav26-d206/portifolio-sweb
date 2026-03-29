@@ -4,7 +4,7 @@
 
 | Nome | GitHub | Exercício |
 |------|--------|-----------|
-| Nome do Aluno 1 | @usuario1 | Exercício 1 |
+| Pedro Henrique Dalle Molle Godoi | @phznorte777 | Exercício 1 |
 | Otávio Giovanelli Biazzi | @OtavioBiazzi | Exercício 2 |
 | Pedro Henrique Miranda | @M1randaPHM | Exercício 3 |
 | Laura Cristina Gonçalves da Cruz| @LauraCristinaCruz | Exercício 4 |
@@ -12,6 +12,7 @@
 ---
 
 ## Exercício 1 — Pergunta conceitual
+#Responsável: Pedro Henrique Dalle Molle Godoi
 
 ## Diferença entre Cookies e Sessions no PHP
 
