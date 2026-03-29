@@ -7,19 +7,26 @@
 | Nome do Aluno 1 | @usuario1 | Exercício 1 |
 | Otávio Giovanelli Biazzi | @OtavioBiazzi | Exercício 2 |
 | Pedro Henrique Miranda | @M1randaPHM | Exercício 3 |
-| Nome do Aluno 4 | @usuario4 | Exercício 4 |
+| Laura Cristina Gonçalves da Cruz| @LauraCristinaCruz | Exercício 4 |
 
 ---
 
 ## Exercício 1 — Pergunta conceitual
 
-**Responsável:** Nome do Aluno 1
+## Diferença entre Cookies e Sessions no PHP
 
-**Pergunta:** Explique a diferença entre cookies e sessions no PHP.
+No PHP, a principal diferença reside no local de armazenamento e na segurança dos dados. **Cookies** são arquivos de texto armazenados no navegador do usuário (client-side), o que os torna ideais para dados de longa duração, como preferências de tema, mas são vulneráveis a manipulações externas. Já as **Sessions** armazenam as informações no servidor (server-side), mantendo apenas um ID de referência no navegador. Isso garante maior segurança para dados sensíveis, como logins, pois o conteúdo real não fica exposto diretamente ao usuário. Enquanto cookies têm validade definida manualmente, sessões geralmente expiram ao fechar o navegador.
 
-**Resposta:**
+---
 
-(escreva aqui sua resposta entre 5 e 10 linhas)
+### Resumo Comparativo
+
+| Característica | Cookie | Session |
+| :--- | :--- | :--- |
+| **Local de Armazenamento** | Navegador (Cliente) | Servidor |
+| **Segurança** | Baixa (Editável pelo usuário) | Alta (Protegida no servidor) |
+| **Capacidade de Dados** | Limitada (aprox. 4KB) | Virtualmente ilimitada |
+| **Persistência** | Pode durar dias, meses ou anos | Geralmente encerra ao fechar o browser |
 
 ---
 
@@ -95,10 +102,22 @@ Quando usamos a função setcookie(), o PHP não cria o cookie no servidor; ele 
 
 ## Exercício 4 — Pergunta de reflexão
 
-**Responsável:** Nome do Aluno 4
+**Responsável:** Laura Cristina Gonçalves da Cruz 
 
 **Pergunta:** Por que sessions são geralmente preferidas para autenticação?
 
 **Resposta:**
 
-(escreva aqui sua resposta entre 5 e 10 linhas)
+As Sessions são preferidas para autenticação principalmente porque são muito mais seguras e confiáveis.
+
+Quando você usa session, as informações importantes (como se o usuário está logado ou não) ficam guardadas no servidor, e não no navegador. O usuário só recebe um identificador (ID da sessão), então ele não tem acesso direto aos dados. Isso diminui bastante o risco de alguém alterar informações ou tentar “burlar” o sistema.
+
+Além disso, fica muito mais fácil de controlar os dados. Por exemplo, você pode encerrar uma sessão a qualquer momento (por exemplo: quando o usuário faz logout), e isso invalida o acesso imediatamente.
+
+Já usar apenas cookies para autenticação é mais arriscado, porque eles ficam no navegador e podem ser:
+
+* alterados pelo próprio usuário;
+* roubados em ataques (como interceptação de dados);
+* reutilizados por outra pessoa indevidamente.
+
+Por isso, na prática, o mais comum é usar sessions para autenticação e,por algumas vezes, cookies só como apoio (por exemplo: para “lembrar” o login), mas nunca como única forma de segurança.
