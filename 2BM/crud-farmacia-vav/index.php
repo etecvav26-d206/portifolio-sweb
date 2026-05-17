@@ -1,1 +1,1 @@
-
+<?php // placeholder index vazio
