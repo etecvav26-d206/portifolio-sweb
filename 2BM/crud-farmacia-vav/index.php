@@ -66,6 +66,45 @@
             </div>
         </article>
     </section>
+
+    <section class="desktop-table-wrapper" aria-label="Produtos em tabela">
+        <table class="desktop-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome do Produto</th>
+                    <th>Fabricante</th>
+                    <th>Preco</th>
+                    <th>Estoque</th>
+                    <th class="text-right">Acoes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="product-id">#001</span></td>
+                    <td>Dipirona Monoidratada</td>
+                    <td>Medley</td>
+                    <td><span class="price-tag">R$ 12,50</span></td>
+                    <td><span class="stock-badge">145 unid.</span></td>
+                    <td class="text-right">
+                        <a class="btn btn-outline btn-sm" href="editar.php">Editar</a>
+                        <a class="btn btn-danger btn-sm" href="excluir.php">Excluir</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="product-id">#002</span></td>
+                    <td>Amoxicilina 500mg</td>
+                    <td>Neo Quimica</td>
+                    <td><span class="price-tag">R$ 25,90</span></td>
+                    <td><span class="stock-badge">5 unid.</span></td>
+                    <td class="text-right">
+                        <a class="btn btn-outline btn-sm" href="editar.php">Editar</a>
+                        <a class="btn btn-danger btn-sm" href="excluir.php">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 </main>
 
 <?php require_once 'includes/footer.php'; ?>
