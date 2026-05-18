@@ -66,21 +66,22 @@ $produtos = $stmt->fetchAll();
                 </tr>
             </thead>
             <tbody>
+                <?php foreach ($produtos as $produto): ?>
                 <tr>
-                    <td><span class="product-id">#001</span></td>
-                    <td>Dipirona Monoidratada</td>
-                    <td>Medley</td>
-                    <td><span class="price-tag">R$ 12,50</span></td>
-                    <td><span class="stock-badge">145 unid.</span></td>
+                    <td><span class="product-id">#<?= str_pad($produto['id'], 3, '0', STR_PAD_LEFT) ?></span></td>
+                    <td><?= htmlspecialchars($produto['nome']) ?></td>
+                    <td><?= htmlspecialchars($produto['fabricante']) ?></td>
+                    <td><span class="price-tag">R$ <?= number_format($produto['preco'], 2, ',', '.') ?></span></td>
+                    <td><span class="stock-badge<?= $produto['estoque'] <= 10 ? ' low' : '' ?>"><?= $produto['estoque'] ?> unid.</span></td>
                     <td class="text-right">
-                        <a class="btn btn-outline btn-sm" href="editar.php">Editar</a>
-                        <a class="btn btn-danger btn-sm" href="excluir.php">Excluir</a>
+                        <a class="btn btn-outline btn-sm" href="editar.php?id=<?= $produto['id'] ?>">Editar</a>
+                        <a class="btn btn-danger btn-sm" href="excluir.php?id=<?= $produto['id'] ?>">Excluir</a>
                     </td>
                 </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </section>
 </main>
 
 <?php require_once 'includes/footer.php'; ?>
-
