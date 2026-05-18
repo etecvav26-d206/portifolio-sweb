@@ -1,6 +1,8 @@
 ﻿<?php
 require_once 'config/conexao.php';
 
+$mensagem = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome       = $_POST['nome'];
     $fabricante = $_POST['fabricante'];
@@ -11,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$nome, $fabricante, $preco, $estoque]);
 
-    header("Location: index.php");
+    header("Location: index.php?msg=cadastrado");
     exit;
 }
 
@@ -22,7 +24,7 @@ require_once 'includes/header.php';
     <section class="page-header">
         <div>
             <h1 class="page-title">Cadastrar Produto</h1>
-            <p class="page-subtitle">Formulario visual para inserir um novo item no estoque.</p>
+            <p class="page-subtitle">Formulario para inserir um novo item no estoque.</p>
         </div>
 
         <a class="btn btn-outline" href="index.php">Voltar</a>
