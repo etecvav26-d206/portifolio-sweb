@@ -56,7 +56,7 @@
                 </div>
                 <div>
                     <p class="info-label">Estoque</p>
-                    <span class="stock-badge">5 unid.</span>
+                    <span class="stock-badge low">5 unid.</span>
                 </div>
             </div>
 
@@ -96,7 +96,7 @@
                     <td>Amoxicilina 500mg</td>
                     <td>Neo Quimica</td>
                     <td><span class="price-tag">R$ 25,90</span></td>
-                    <td><span class="stock-badge">5 unid.</span></td>
+                    <td><span class="stock-badge low">5 unid.</span></td>
                     <td class="text-right">
                         <a class="btn btn-outline btn-sm" href="editar.php">Editar</a>
                         <a class="btn btn-danger btn-sm" href="excluir.php">Excluir</a>
