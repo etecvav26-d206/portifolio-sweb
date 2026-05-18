@@ -1,3 +1,4 @@
+<!-- Includes: Cabecalho do site -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -28,3 +29,4 @@
             </nav>
         </div>
     </header>
+
