@@ -41,7 +41,7 @@ $produtos = $stmt->fetchAll();
                 </div>
                 <div>
                     <p class="info-label">Estoque</p>
-                    <span class="stock-badge"><?= $produto['estoque'] ?> unid.</span>
+                    <span class="stock-badge<?= $produto['estoque'] <= 10 ? ' low' : '' ?>"><?= $produto['estoque'] ?> unid.</span>
                 </div>
             </div>
 
@@ -83,3 +83,4 @@ $produtos = $stmt->fetchAll();
 </main>
 
 <?php require_once 'includes/footer.php'; ?>
+
