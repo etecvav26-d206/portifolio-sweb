@@ -15,28 +15,28 @@
             <div class="form-grid">
                 <div class="form-group full">
                     <label class="form-label" for="nome">Nome da Medicacao</label>
-                    <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome do produto">
+                    <input class="form-control" type="text" id="nome" name="nome" value="Dipirona Monoidratada">
                 </div>
 
                 <div class="form-group full">
                     <label class="form-label" for="fabricante">Fabricante / Laboratorio</label>
-                    <input class="form-control" type="text" id="fabricante" name="fabricante" placeholder="Fabricante">
+                    <input class="form-control" type="text" id="fabricante" name="fabricante" value="Medley">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="preco">Preco (R$)</label>
-                    <input class="form-control" type="number" step="0.01" min="0" id="preco" name="preco" placeholder="0.00">
+                    <input class="form-control" type="number" step="0.01" min="0" id="preco" name="preco" value="12.50">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="estoque">Qtd. em Estoque</label>
-                    <input class="form-control" type="number" min="0" id="estoque" name="estoque" placeholder="0">
+                    <input class="form-control" type="number" min="0" id="estoque" name="estoque" value="145">
                 </div>
             </div>
 
             <div class="form-actions">
                 <a class="btn btn-outline" href="index.php">Cancelar</a>
-                <button class="btn btn-primary" type="submit">Salvar Alteracoes</button>
+                <button class="btn btn-primary" type="submit">Atualizar Produto</button>
             </div>
         </form>
     </section>
