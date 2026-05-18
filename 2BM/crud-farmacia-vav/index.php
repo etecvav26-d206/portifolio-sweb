@@ -20,6 +20,10 @@ $produtos = $stmt->fetchAll();
     </section>
 
     <section class="data-grid" aria-label="Produtos em cards">
+        <?php if (count($produtos) === 0): ?>
+            <p>Nenhum produto cadastrado ainda.</p>
+        <?php endif; ?>
+
         <?php foreach ($produtos as $produto): ?>
         <article class="product-card">
             <div class="product-header">
@@ -68,17 +72,6 @@ $produtos = $stmt->fetchAll();
                     <td>Medley</td>
                     <td><span class="price-tag">R$ 12,50</span></td>
                     <td><span class="stock-badge">145 unid.</span></td>
-                    <td class="text-right">
-                        <a class="btn btn-outline btn-sm" href="editar.php">Editar</a>
-                        <a class="btn btn-danger btn-sm" href="excluir.php">Excluir</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span class="product-id">#002</span></td>
-                    <td>Amoxicilina 500mg</td>
-                    <td>Neo Quimica</td>
-                    <td><span class="price-tag">R$ 25,90</span></td>
-                    <td><span class="stock-badge low">5 unid.</span></td>
                     <td class="text-right">
                         <a class="btn btn-outline btn-sm" href="editar.php">Editar</a>
                         <a class="btn btn-danger btn-sm" href="excluir.php">Excluir</a>
