@@ -1,4 +1,4 @@
-<!-- Includes: Cabecalho do site -->
+﻿<!-- Includes: Cabecalho do site -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
