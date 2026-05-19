@@ -8,6 +8,14 @@ if (!$id) {
     exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $stmt = $pdo->prepare("DELETE FROM produtos WHERE id = ?");
+    $stmt->execute([$id]);
+
+    header("Location: index.php?msg=excluido");
+    exit;
+}
+
 $stmt = $pdo->prepare("SELECT * FROM produtos WHERE id = ?");
 $stmt->execute([$id]);
 $produto = $stmt->fetch();
