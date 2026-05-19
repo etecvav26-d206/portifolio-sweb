@@ -8,6 +8,20 @@ if (!$id) {
     exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nome       = $_POST['nome'];
+    $fabricante = $_POST['fabricante'];
+    $preco      = $_POST['preco'];
+    $estoque    = $_POST['estoque'];
+
+    $sql = "UPDATE produtos SET nome = ?, fabricante = ?, preco = ?, estoque = ? WHERE id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$nome, $fabricante, $preco, $estoque, $id]);
+
+    header("Location: index.php?msg=atualizado");
+    exit;
+}
+
 $stmt = $pdo->prepare("SELECT * FROM produtos WHERE id = ?");
 $stmt->execute([$id]);
 $produto = $stmt->fetch();
@@ -24,7 +38,7 @@ require_once 'includes/header.php';
     <section class="page-header">
         <div>
             <h1 class="page-title">Editar Produto</h1>
-            <p class="page-subtitle">Formulario visual para atualizar os dados de um produto.</p>
+            <p class="page-subtitle">Formulario para atualizar os dados de um produto.</p>
         </div>
 
         <a class="btn btn-outline" href="index.php">Voltar</a>
