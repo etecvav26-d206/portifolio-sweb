@@ -119,3 +119,31 @@ Para senhas, recomenda-se usar algoritmos próprios para armazenamento de senha,
 - `PASSWORD_ARGON2ID`, quando disponível no ambiente PHP.
 
 Algoritmos rápidos como MD5 e SHA1 não devem ser usados para senhas. Eles são antigos e rápidos demais, o que facilita ataques de força bruta e uso de listas vazadas. A OWASP recomenda algoritmos próprios para senhas, como Argon2id, bcrypt, scrypt e PBKDF2, com parâmetros adequados de custo (OWASP, 2024a).
+
+## 4. Funções de Codificação
+
+### base64_encode()
+
+A função `base64_encode()` codifica uma string usando Base64. Isso permite representar dados binários como texto, o que pode ser útil em transporte de dados, APIs, anexos, imagens embutidas ou tokens que precisam circular em formato textual (PHP DOCUMENTATION GROUP, 2026d).
+
+Exemplo:
+
+```php
+$textoCodificado = base64_encode("Exemplo");
+```
+
+### base64_decode()
+
+A função `base64_decode()` faz o processo inverso: transforma o texto em Base64 de volta para o conteúdo original (PHP DOCUMENTATION GROUP, 2026e).
+
+Exemplo:
+
+```php
+$textoOriginal = base64_decode($textoCodificado);
+```
+
+### Por que Base64 não é criptografia?
+
+Base64 não é criptografia porque não usa chave secreta e não tem a finalidade de esconder dados. Qualquer pessoa pode decodificar Base64 com ferramentas simples. Por isso, Base64 não deve ser usado para proteger senhas, dados pessoais, tokens secretos ou informações sensíveis.
+
+Base64 é apenas uma forma de codificação. Ele pode ajudar no transporte de dados, mas não substitui criptografia, hash ou autenticação.
