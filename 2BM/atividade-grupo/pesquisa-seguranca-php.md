@@ -220,3 +220,74 @@ Um algoritmo de hash para senha deve:
 - permitir atualização futura conforme a tecnologia evolui.
 
 Por isso, `password_hash()` é mais indicado para senhas do que `hash("sha256", $senha)`. SHA-256 é útil para outras finalidades, mas não resolve sozinho os requisitos de armazenamento seguro de senhas.
+
+## 7. Proteção contra Ataques
+
+### SQL Injection
+
+SQL Injection acontece quando uma aplicação monta consultas SQL misturando comandos com dados digitados pelo usuário. Um atacante pode inserir trechos de SQL para alterar a consulta original, acessar dados indevidos, apagar registros ou burlar login.
+
+Exemplo de risco:
+
+```php
+$sql = "SELECT * FROM usuarios WHERE email = '$email'";
+```
+
+Forma de prevenção:
+
+- usar consultas preparadas;
+- usar PDO ou MySQLi com parâmetros;
+- validar entradas;
+- limitar permissões do usuário do banco;
+- não exibir erros SQL diretamente para o usuário.
+
+A OWASP recomenda consultas parametrizadas como uma das principais formas de prevenir SQL Injection (OWASP, 2024b).
+
+Exemplo com PDO:
+
+```php
+$stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = :email");
+$stmt->execute(["email" => $email]);
+```
+
+### Cross-Site Scripting (XSS)
+
+XSS ocorre quando um atacante consegue inserir código JavaScript malicioso em uma página acessada por outros usuários. Isso pode permitir roubo de sessão, redirecionamento, alteração visual da página ou captura de dados.
+
+Formas de prevenção:
+
+- escapar saídas com `htmlspecialchars()`;
+- validar dados de entrada;
+- evitar inserir dados do usuário diretamente no HTML;
+- usar Content Security Policy (CSP);
+- tratar corretamente atributos, URLs e JavaScript;
+- marcar cookies de sessão como `HttpOnly`.
+
+Exemplo:
+
+```php
+echo htmlspecialchars($nome, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
+```
+
+A OWASP destaca que a prevenção de XSS depende principalmente de codificação de saída correta, conforme o contexto em que o dado aparece na página (OWASP, 2024c).
+
+### Cross-Site Request Forgery (CSRF)
+
+CSRF acontece quando um usuário autenticado é induzido a executar uma ação sem perceber, como alterar senha, excluir conta ou fazer uma transferência. O navegador envia automaticamente cookies de sessão, e o servidor pode acreditar que a requisição foi legítima.
+
+Formas de prevenção:
+
+- usar tokens CSRF em formulários;
+- validar o token no servidor;
+- usar cookies com `SameSite`;
+- exigir confirmação para ações sensíveis;
+- verificar método HTTP adequado;
+- evitar ações importantes via GET.
+
+Exemplo conceitual:
+
+```php
+$_SESSION["csrf"] = bin2hex(random_bytes(32));
+```
+
+A OWASP recomenda o uso de tokens imprevisíveis e associados à sessão do usuário para prevenir CSRF (OWASP, 2024d).
