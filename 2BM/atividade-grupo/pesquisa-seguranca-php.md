@@ -189,3 +189,34 @@ flowchart TD
     D --> E["Descriptografia com a mesma chave"]
     E --> F["Dado original recuperado"]
 ```
+
+## 6. Proteção de Senhas
+
+Uma senha nunca deve ser salva em texto puro. Se o banco de dados for vazado, senhas em texto puro ficam imediatamente expostas. Isso é perigoso porque muitas pessoas reutilizam a mesma senha em vários serviços.
+
+O armazenamento correto de senha deve seguir esta ideia:
+
+```text
+Cadastro:
+senha do usuario -> password_hash() -> hash salvo no banco
+
+Login:
+senha digitada + hash salvo -> password_verify() -> resultado da verificacao
+```
+
+### O que é salt?
+
+Salt é um valor aleatório adicionado ao processo de geração do hash. Ele impede que duas senhas iguais gerem exatamente o mesmo hash e dificulta ataques com tabelas prontas. Ao usar `password_hash()`, o PHP gera e armazena o salt dentro do próprio hash (PHP DOCUMENTATION GROUP, 2026a).
+
+### O que torna um algoritmo de hash seguro?
+
+Um algoritmo de hash para senha deve:
+
+- ser feito especificamente para senhas;
+- usar salt;
+- permitir ajuste de custo;
+- ser lento o suficiente para dificultar força bruta;
+- ser resistente a ataques conhecidos;
+- permitir atualização futura conforme a tecnologia evolui.
+
+Por isso, `password_hash()` é mais indicado para senhas do que `hash("sha256", $senha)`. SHA-256 é útil para outras finalidades, mas não resolve sozinho os requisitos de armazenamento seguro de senhas.
