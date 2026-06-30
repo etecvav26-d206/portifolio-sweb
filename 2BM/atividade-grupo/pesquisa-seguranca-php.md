@@ -34,7 +34,7 @@ Criptografia, hash e codificação são conceitos diferentes. Confundir esses te
 |---|---|---|---|
 | Criptografia | Técnica que transforma uma informação em um conteúdo ilegível usando chave. | Sim, se houver a chave correta. | Proteger um dado que precisa ser lido depois. |
 | Hash | Função que transforma dados em um resumo de tamanho fixo. | Não, deve ser unidirecional. | Armazenar senhas de forma segura. |
-| Codificação | Transformação de dados para outro formato de representação. | Sim, sem chave secreta. | Converter dados binários para Base64. |
+| Codificação | Transformação de dados para outro formato de representação (ex: binário para texto). | Sim, sem chave secreta. | Converter dados binários para Base64. |
 
 ### Criptografia
 
