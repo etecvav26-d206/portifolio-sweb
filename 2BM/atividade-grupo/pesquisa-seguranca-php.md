@@ -147,3 +147,45 @@ $textoOriginal = base64_decode($textoCodificado);
 Base64 não é criptografia porque não usa chave secreta e não tem a finalidade de esconder dados. Qualquer pessoa pode decodificar Base64 com ferramentas simples. Por isso, Base64 não deve ser usado para proteger senhas, dados pessoais, tokens secretos ou informações sensíveis.
 
 Base64 é apenas uma forma de codificação. Ele pode ajudar no transporte de dados, mas não substitui criptografia, hash ou autenticação.
+
+## 5. Criptografia no PHP
+
+OpenSSL é uma biblioteca usada para operações criptográficas, como criptografia simétrica, criptografia assimétrica, certificados digitais e comunicação segura. No PHP, a extensão OpenSSL permite usar funções criptográficas diretamente no código (PHP DOCUMENTATION GROUP, 2026f).
+
+No PHP, algumas funções relacionadas à criptografia com OpenSSL são:
+
+| Função | Finalidade |
+|---|---|
+| `openssl_encrypt()` | Criptografa dados com um algoritmo e uma chave. |
+| `openssl_decrypt()` | Descriptografa dados criptografados anteriormente. |
+| `openssl_get_cipher_methods()` | Lista métodos de cifra disponíveis no ambiente. |
+| `openssl_cipher_iv_length()` | Retorna o tamanho do IV necessário para uma cifra. |
+| `openssl_random_pseudo_bytes()` | Gera bytes aleatórios, embora `random_bytes()` seja preferível em muitos casos modernos. |
+
+Exemplo conceitual:
+
+```php
+$cipher = "aes-256-gcm";
+$key = random_bytes(32);
+$iv = random_bytes(openssl_cipher_iv_length($cipher));
+
+$ciphertext = openssl_encrypt(
+    $dados,
+    $cipher,
+    $key,
+    OPENSSL_RAW_DATA,
+    $iv,
+    $tag
+);
+```
+
+Em criptografia, não basta apenas chamar uma função. Também é necessário proteger a chave, usar algoritmos atuais, gerar IVs corretamente, evitar reutilização indevida de IV e preferir modos autenticados, como GCM, quando adequados. A chave nunca deve ficar exposta em código público ou no repositório.
+
+```mermaid
+flowchart TD
+    A["Dado original"] --> B["Criptografia com chave"]
+    B --> C["Texto cifrado"]
+    C --> D["Armazenamento ou transmissao"]
+    D --> E["Descriptografia com a mesma chave"]
+    E --> F["Dado original recuperado"]
+```
