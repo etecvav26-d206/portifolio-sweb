@@ -67,3 +67,55 @@ Exemplo de uso:
 ```text
 imagem ou arquivo binario -> Base64 -> texto transportavel
 ```
+
+## 3. Funções de Hash no PHP
+
+O PHP possui funções para trabalhar com hashes. Algumas são próprias para senhas, e outras servem para gerar resumos de dados em situações gerais.
+
+### password_hash()
+
+A função `password_hash()` cria um hash seguro para senha. Ela já inclui recursos importantes, como o uso de algoritmo adequado e salt. O salt é incorporado ao hash gerado, então não é necessário criar uma coluna separada apenas para ele quando se usa essa função corretamente (PHP DOCUMENTATION GROUP, 2026a).
+
+Exemplo:
+
+```php
+$hash = password_hash($senha, PASSWORD_DEFAULT);
+```
+
+Essa função deve ser usada no cadastro ou na troca de senha do usuário.
+
+### password_verify()
+
+A função `password_verify()` compara uma senha digitada com o hash salvo anteriormente. Ela retorna `true` se a senha corresponder ao hash e `false` caso contrário (PHP DOCUMENTATION GROUP, 2026b).
+
+Exemplo:
+
+```php
+if (password_verify($senhaDigitada, $hashSalvo)) {
+    echo "Login permitido";
+}
+```
+
+Essa função deve ser usada no login, quando o usuário informa a senha e o sistema precisa verificar se ela está correta.
+
+### hash()
+
+A função `hash()` gera um hash usando algoritmos como `sha256`, `sha512` e outros. Ela pode ser útil para integridade de arquivos, assinaturas simples e comparação de resumos, mas não deve ser a escolha principal para guardar senhas de usuários (PHP DOCUMENTATION GROUP, 2026c).
+
+Exemplo:
+
+```php
+$resumo = hash("sha256", "conteudo");
+```
+
+Para senhas, o mais adequado é usar `password_hash()` e `password_verify()`, porque essas funções foram feitas especificamente para esse caso.
+
+### Algoritmos recomendados atualmente
+
+Para senhas, recomenda-se usar algoritmos próprios para armazenamento de senha, como:
+
+- `PASSWORD_DEFAULT`, para usar o padrão recomendado pelo PHP;
+- `PASSWORD_BCRYPT`, opção muito usada e ainda aceita;
+- `PASSWORD_ARGON2ID`, quando disponível no ambiente PHP.
+
+Algoritmos rápidos como MD5 e SHA1 não devem ser usados para senhas. Eles são antigos e rápidos demais, o que facilita ataques de força bruta e uso de listas vazadas. A OWASP recomenda algoritmos próprios para senhas, como Argon2id, bcrypt, scrypt e PBKDF2, com parâmetros adequados de custo (OWASP, 2024a).
