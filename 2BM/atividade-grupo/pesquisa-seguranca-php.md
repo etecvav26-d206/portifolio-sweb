@@ -291,3 +291,29 @@ $_SESSION["csrf"] = bin2hex(random_bytes(32));
 ```
 
 A OWASP recomenda o uso de tokens imprevisíveis e associados à sessão do usuário para prevenir CSRF (OWASP, 2024d).
+
+## 8. Aplicações Práticas
+
+### Sistemas de login
+
+Sistemas de login usam `password_hash()` para armazenar senhas e `password_verify()` para autenticar usuários. Também precisam proteger sessões e impedir força bruta.
+
+### Comércio eletrônico
+
+Lojas virtuais lidam com dados pessoais, endereços, histórico de compras e pagamentos. Por isso, precisam de HTTPS, validação de entrada, proteção contra SQL Injection e boas práticas de sessão.
+
+### Internet Banking
+
+Internet Banking exige alto nível de proteção, pois envolve dinheiro e dados financeiros. Nesse tipo de sistema, criptografia, autenticação forte, registro de eventos e proteção contra ataques são indispensáveis.
+
+### Redes sociais
+
+Redes sociais armazenam perfis, mensagens, fotos e dados de acesso. XSS é um risco importante nesse contexto, porque usuários podem publicar conteúdo que será exibido para outras pessoas.
+
+### Sistemas escolares
+
+Sistemas escolares guardam notas, frequência, dados de alunos, professores e responsáveis. A proteção desses dados evita exposição de informações pessoais e alterações indevidas.
+
+### Aplicativos de gerenciamento de usuários
+
+Aplicações administrativas precisam controlar permissões, autenticação, sessão e auditoria. Nesses sistemas, falhas de segurança podem permitir acesso indevido a áreas restritas.
