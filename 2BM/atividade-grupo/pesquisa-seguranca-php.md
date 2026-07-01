@@ -225,7 +225,7 @@ Por isso, `password_hash()` é mais indicado para senhas do que `hash("sha256", 
 
 ### SQL Injection
 
-SQL Injection acontece quando uma aplicação monta consultas SQL misturando comandos com dados digitados pelo usuário. Um atacante pode inserir trechos de SQL para alterar a consulta original, acessar dados indevidos, apagar registros ou burlar login.
+SQL Injection (injeção de SQL) acontece quando uma aplicação monta consultas SQL misturando comandos com dados digitados pelo usuário. Um atacante pode inserir trechos de SQL para alterar a consulta original, acessar dados indevidos, apagar registros ou burlar login.
 
 Exemplo de risco:
 
