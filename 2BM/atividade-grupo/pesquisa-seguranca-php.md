@@ -355,3 +355,39 @@ O usuário do banco de dados deve ter apenas as permissões necessárias. Uma ap
 ### Fazer backup e monitoramento
 
 Backups ajudam na recuperação após falhas, e monitoramento ajuda a identificar tentativas de ataque ou comportamento estranho.
+
+## 10. Conclusão
+
+A segurança em aplicações web é essencial porque sistemas conectados à Internet lidam com dados reais de usuários e estão expostos a ataques constantemente. Proteger essas informações evita prejuízos, vazamentos, invasões e perda de confiança.
+
+Entre os recursos pesquisados, o mais importante para aplicações comuns é o uso correto de `password_hash()` e `password_verify()`, porque senhas são um dos principais alvos de ataques. Também são muito importantes consultas preparadas contra SQL Injection, escape de saída contra XSS e tokens contra CSRF.
+
+Durante a pesquisa, o grupo aprendeu a diferença entre criptografia, hash e codificação; entendeu por que Base64 não é criptografia; conheceu funções importantes do PHP para senhas, hash, codificação e OpenSSL; e compreendeu boas práticas para reduzir riscos em aplicações web.
+
+## Referências
+
+ANPD - AUTORIDADE NACIONAL DE PROTEÇÃO DE DADOS. **Guia orientativo sobre segurança da informação para agentes de tratamento de pequeno porte**. Brasília: ANPD, 2021. Disponível em: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes/guia-vf.pdf/%40%40display-file/file>. Acesso em: 30 jun. 2026.
+
+CERT.BR. **Cartilha de Segurança para Internet**. São Paulo: Comitê Gestor da Internet no Brasil, 2024. Disponível em: <https://cartilha.cert.br/>. Acesso em: 30 jun. 2026.
+
+OPENSSL PROJECT. **OpenSSL Documentation**. [S. l.]: OpenSSL Project, 2026. Disponível em: <https://docs.openssl.org/>. Acesso em: 30 jun. 2026.
+
+OWASP. **Password Storage Cheat Sheet**. [S. l.]: OWASP Foundation, 2024a. Disponível em: <https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html>. Acesso em: 30 jun. 2026.
+
+OWASP. **SQL Injection Prevention Cheat Sheet**. [S. l.]: OWASP Foundation, 2024b. Disponível em: <https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html>. Acesso em: 30 jun. 2026.
+
+OWASP. **Cross Site Scripting Prevention Cheat Sheet**. [S. l.]: OWASP Foundation, 2024c. Disponível em: <https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html>. Acesso em: 30 jun. 2026.
+
+OWASP. **Cross-Site Request Forgery Prevention Cheat Sheet**. [S. l.]: OWASP Foundation, 2024d. Disponível em: <https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html>. Acesso em: 30 jun. 2026.
+
+PHP DOCUMENTATION GROUP. **password_hash**. PHP Manual, 2026a. Disponível em: <https://www.php.net/manual/en/function.password-hash.php>. Acesso em: 30 jun. 2026.
+
+PHP DOCUMENTATION GROUP. **password_verify**. PHP Manual, 2026b. Disponível em: <https://www.php.net/manual/en/function.password-verify.php>. Acesso em: 30 jun. 2026.
+
+PHP DOCUMENTATION GROUP. **hash**. PHP Manual, 2026c. Disponível em: <https://www.php.net/manual/en/function.hash.php>. Acesso em: 30 jun. 2026.
+
+PHP DOCUMENTATION GROUP. **base64_encode**. PHP Manual, 2026d. Disponível em: <https://www.php.net/manual/en/function.base64-encode.php>. Acesso em: 30 jun. 2026.
+
+PHP DOCUMENTATION GROUP. **base64_decode**. PHP Manual, 2026e. Disponível em: <https://www.php.net/manual/en/function.base64-decode.php>. Acesso em: 30 jun. 2026.
+
+PHP DOCUMENTATION GROUP. **OpenSSL Functions**. PHP Manual, 2026f. Disponível em: <https://www.php.net/manual/en/ref.openssl.php>. Acesso em: 30 jun. 2026.
