@@ -391,3 +391,4 @@ PHP DOCUMENTATION GROUP. **base64_encode**. PHP Manual, 2026d. Disponível em: <
 PHP DOCUMENTATION GROUP. **base64_decode**. PHP Manual, 2026e. Disponível em: <https://www.php.net/manual/en/function.base64-decode.php>. Acesso em: 30 jun. 2026.
 
 PHP DOCUMENTATION GROUP. **OpenSSL Functions**. PHP Manual, 2026f. Disponível em: <https://www.php.net/manual/en/ref.openssl.php>. Acesso em: 30 jun. 2026.
+
