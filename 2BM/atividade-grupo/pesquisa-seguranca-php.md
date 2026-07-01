@@ -317,3 +317,41 @@ Sistemas escolares guardam notas, frequência, dados de alunos, professores e re
 ### Aplicativos de gerenciamento de usuários
 
 Aplicações administrativas precisam controlar permissões, autenticação, sessão e auditoria. Nesses sistemas, falhas de segurança podem permitir acesso indevido a áreas restritas.
+
+## 9. Boas Práticas de Segurança
+
+### Validar entradas do usuário
+
+Todo dado recebido de formulários, URLs, cookies ou APIs deve ser validado. O sistema deve conferir tipo, tamanho, formato e regras esperadas.
+
+### Utilizar consultas preparadas
+
+Consultas preparadas reduzem o risco de SQL Injection porque separam o comando SQL dos valores enviados pelo usuário.
+
+### Proteger sessões
+
+É importante configurar cookies de sessão com opções como `HttpOnly`, `Secure` e `SameSite`, além de regenerar o ID da sessão após login.
+
+### Utilizar HTTPS
+
+HTTPS protege a comunicação entre navegador e servidor. Sem HTTPS, dados podem ser interceptados em redes inseguras.
+
+### Manter o PHP atualizado
+
+Versões antigas podem ter falhas conhecidas. Manter PHP, frameworks e bibliotecas atualizados reduz riscos de exploração.
+
+### Proteger arquivos de configuração
+
+Arquivos com senhas de banco, chaves secretas e configurações sensíveis não devem ficar acessíveis publicamente nem ser enviados ao GitHub.
+
+### Tratar erros corretamente
+
+Erros detalhados devem ser registrados em logs internos, mas não exibidos para usuários. Mensagens públicas devem ser genéricas para não revelar informações do sistema.
+
+### Usar permissões mínimas
+
+O usuário do banco de dados deve ter apenas as permissões necessárias. Uma aplicação que só precisa consultar e inserir dados não deve usar uma conta com permissão total de administrador.
+
+### Fazer backup e monitoramento
+
+Backups ajudam na recuperação após falhas, e monitoramento ajuda a identificar tentativas de ataque ou comportamento estranho.
