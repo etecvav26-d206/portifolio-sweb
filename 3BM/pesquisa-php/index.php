@@ -17,6 +17,14 @@ $iv    = "1234567890123456";
     <main class="container">
         <h2>Funcoes de Criptografia</h2>
 
+        <section class="intro">
+            <p class="section-kicker">Por que esta página existe?</p>
+            <p>Este laboratório mostra como o PHP transforma um mesmo texto usando técnicas diferentes. Algumas funções criam um resumo irreversível, outras apenas codificam dados e a criptografia simétrica permite proteger e recuperar uma informação com uma chave.</p>
+            <p>Digite uma frase abaixo para acompanhar os resultados em tempo real.</p>
+        </section>
+        <aside class="nota">
+            <strong>Leitura rápida:</strong> Base64 não é criptografia; MD5 e SHA1 são funções antigas; para senhas, o PHP recomenda <code>password_hash()</code>; e o AES usa uma chave para cifrar o texto.
+        </aside>
         <section class="form-section">
             <form method="POST" action="">
                 <label for="texto">Texto a ser criptografado:</label>
