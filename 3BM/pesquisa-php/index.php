@@ -34,8 +34,8 @@ $iv    = "1234567890123456";
                     <tr><td><code>sha1()</code></td><td>Hash SHA1</td><td>Hash de 160 bits (40 hex).</td><td><code><?php echo sha1($texto); ?></code></td></tr>
                     <tr><td><code>hash('sha256')</code></td><td>Hash SHA256</td><td>Hash de 256 bits, mais seguro que MD5/SHA1.</td><td><code><?php echo hash('sha256', $texto); ?></code></td></tr>
                     <tr><td><code>password_hash()</code></td><td>Senha Segura</td><td>Hash bcrypt recomendado para senhas.</td><td><code><?php echo password_hash($texto, PASSWORD_DEFAULT); ?></code></td></tr>
-                    <tr><td><code>base64_encode()</code></td><td>Base64</td><td>Codificacao Base64.</td><td><code><?php echo base64_encode($texto); ?></code></td></tr>
-                    <tr><td><code>openssl_encrypt()</code></td><td>AES-256-CBC</td><td>Criptografia simetrica.</td><td><code>-</code></td></tr>
+                    <tr><td><code>base64_encode()</code></td><td>Base64</td><td>Codifica em Base64 (nao e criptografia).</td><td><code><?php echo base64_encode($texto); ?></code></td></tr>
+                    <tr><td><code>openssl_encrypt()</code></td><td>AES-256-CBC</td><td>Criptografia simetrica reversivel com chave.</td><td><code><?php echo openssl_encrypt($texto, "AES-256-CBC", $chave, 0, $iv); ?></code></td></tr>
                 </tbody>
             </table>
         </section>
