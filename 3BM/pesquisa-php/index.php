@@ -16,6 +16,7 @@ $iv    = "1234567890123456";
     <header><h1>Criptografia no PHP</h1></header>
     <main class="container">
         <h2>Funcoes de Criptografia</h2>
+
         <section class="form-section">
             <form method="POST" action="">
                 <label for="texto">Texto a ser criptografado:</label>
@@ -29,10 +30,10 @@ $iv    = "1234567890123456";
             <table>
                 <thead><tr><th>Funcao</th><th>Tipo</th><th>Descricao</th><th>Resultado</th></tr></thead>
                 <tbody>
-                    <tr><td><code>md5()</code></td><td>Hash MD5</td><td>Hash de 128 bits.</td><td><code>-</code></td></tr>
-                    <tr><td><code>sha1()</code></td><td>Hash SHA1</td><td>Hash de 160 bits.</td><td><code>-</code></td></tr>
+                    <tr><td><code>md5()</code></td><td>Hash MD5</td><td>Hash de 128 bits (32 hex).</td><td><code><?php echo md5($texto); ?></code></td></tr>
+                    <tr><td><code>sha1()</code></td><td>Hash SHA1</td><td>Hash de 160 bits (40 hex).</td><td><code>-</code></td></tr>
                     <tr><td><code>hash('sha256')</code></td><td>Hash SHA256</td><td>Hash de 256 bits.</td><td><code>-</code></td></tr>
-                    <tr><td><code>password_hash()</code></td><td>Senha Segura</td><td>Hash bcrypt.</td><td><code>-</code></td></tr>
+                    <tr><td><code>password_hash()</code></td><td>Senha Segura</td><td>Hash bcrypt para senhas.</td><td><code>-</code></td></tr>
                     <tr><td><code>base64_encode()</code></td><td>Base64</td><td>Codificacao Base64.</td><td><code>-</code></td></tr>
                     <tr><td><code>openssl_encrypt()</code></td><td>AES-256-CBC</td><td>Criptografia simetrica.</td><td><code>-</code></td></tr>
                 </tbody>
