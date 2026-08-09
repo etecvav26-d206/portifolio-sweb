@@ -37,7 +37,7 @@ h2 {
 }
 
 .intro {
-    max-width: 760px;
+    max-width: none;
     color: #475569;
     line-height: 1.6;
     margin-bottom: 18px;
@@ -47,11 +47,23 @@ h2 {
     margin: 0 0 10px;
 }
 
+.explicacao {
+    max-width: none;
+    margin-top: 28px;
+    padding-top: 4px;
+}
+
+.explicacao p {
+    text-align: justify;
+    line-height: 1.7;
+}
+
 .nota {
     color: #475569;
     margin-bottom: 24px;
     font-size: 13px;
     line-height: 1.5;
+    text-align: justify;
 }
 
 .form-section {

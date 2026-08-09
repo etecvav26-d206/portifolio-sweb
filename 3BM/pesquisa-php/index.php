@@ -40,53 +40,34 @@ $iv    = "1234567890123456";
                     <tr><td><code>hash('sha256')</code></td><td>Hash SHA256</td><td>Hash de 256 bits, mais seguro que MD5/SHA1.</td><td><code><?php echo hash('sha256', $texto); ?></code></td></tr>
                     <tr><td><code>password_hash()</code></td><td>Senha Segura</td><td>Hash bcrypt recomendado para senhas.</td><td><code><?php echo password_hash($texto, PASSWORD_DEFAULT); ?></code></td></tr>
                     <tr><td><code>base64_encode()</code></td><td>Base64</td><td>Codifica em Base64 (nao e criptografia).</td><td><code><?php echo base64_encode($texto); ?></code></td></tr>
-                    <tr><td><code>openssl_encrypt()</code></td><td>AES-256-CBC</td><td>Criptografia simetrica reversivel com chave.</td><td><code><?php echo openssl_encrypt($texto, "AES-256-CBC", $chave, 0, $iv); ?></code></td></tr>
+                    <tr><td><code>openssl_encrypt()</code></td><td>AES-256-CBC</td><td>Criptografia simetrica reversivel com chave.</td><td><code><?php echo function_exists('openssl_encrypt') ? openssl_encrypt($texto, "AES-256-CBC", $chave, 0, $iv) : 'Extensao OpenSSL nao habilitada'; ?></code></td></tr>
                 </tbody>
             </table>
         </section>
         <section class="intro explicacao">
-            <h2>Entendendo os resultados</h2>
+            <h2>Resumo das técnicas</h2>
 
             <p>
-                Cada função apresentada transforma o texto de uma maneira diferente.
-                Por isso, é importante entender que hash, codificação e criptografia
-                não são a mesma coisa.
+                <strong>MD5 e SHA1:</strong> são funções de hash. Elas transformam o texto em um
+                código de tamanho fixo, mas não permitem recuperar o texto original. São métodos
+                antigos e não devem ser usados para proteger senhas.
             </p>
 
-            <h3>Hash</h3>
             <p>
-                Funções como <code>md5()</code>, <code>sha1()</code> e
-                <code>hash('sha256')</code> geram um resumo do texto.
-                O resultado não deve ser convertido de volta para o texto original.
-                Atualmente, MD5 e SHA1 são considerados antigos e não devem ser
-                utilizados para proteger senhas.
+                <strong>SHA-256 e password_hash():</strong> também geram hashes, mas são opções mais
+                adequadas. O <code>password_hash()</code> foi feito especialmente para armazenar senhas
+                com mais segurança.
             </p>
 
-            <h3>Senhas</h3>
             <p>
-                A função <code>password_hash()</code> é indicada para armazenar senhas.
-                Ela cria um hash seguro utilizando um salt, dificultando ataques por
-                tentativa e comparação de senhas.
+                <strong>Base64:</strong> não é criptografia. É apenas uma codificação usada para
+                representar dados em outro formato e pode ser revertida facilmente.
             </p>
 
-            <h3>Codificação Base64</h3>
             <p>
-                A função <code>base64_encode()</code> apenas transforma o texto em um
-                formato diferente para facilitar o transporte ou armazenamento.
-                Base64 não é criptografia e pode ser revertido facilmente.
-            </p>
-
-            <h3>Criptografia AES</h3>
-            <p>
-                A função <code>openssl_encrypt()</code> utiliza o algoritmo AES para
-                proteger o texto com uma chave. Diferentemente do hash, a criptografia
-                é reversível quando a chave correta é utilizada.
-            </p>
-
-            <p class="nota">
-                Em resumo: use hash para verificar informações, Base64 para codificar
-                dados e criptografia para proteger informações que precisam ser
-                recuperadas posteriormente.
+                <strong>AES:</strong> é a criptografia desta página. O texto é protegido com uma chave
+                e pode ser recuperado depois usando a chave correta. Neste computador, a extensão
+                OpenSSL precisa estar habilitada para gerar o resultado do AES.
             </p>
         </section>
     </main>
