@@ -26,7 +26,7 @@ $iv    = "1234567890123456";
             <form method="POST" action="">
                 <label for="texto">Texto a ser criptografado:</label>
                 <div class="input-wrapper">
-                    <input type="text" id="texto" name="texto" value="<?php echo htmlspecialchars($texto); ?>" placeholder="Digite qualquer texto...">
+                    <input type="text" id="texto" name="texto" value="<?php echo htmlspecialchars($texto, ENT_QUOTES, 'UTF-8'); ?>" placeholder="Digite qualquer texto...">
                     <button type="submit" class="btn-submit">Processar</button>
                 </div>
             </form>
@@ -40,9 +40,35 @@ $iv    = "1234567890123456";
                     <tr><td><code>hash('sha256')</code></td><td>Hash SHA256</td><td>Hash de 256 bits, mais seguro que MD5/SHA1.</td><td><code><?php echo hash('sha256', $texto); ?></code></td></tr>
                     <tr><td><code>password_hash()</code></td><td>Senha Segura</td><td>Hash bcrypt recomendado para senhas.</td><td><code><?php echo password_hash($texto, PASSWORD_DEFAULT); ?></code></td></tr>
                     <tr><td><code>base64_encode()</code></td><td>Base64</td><td>Codifica em Base64 (nao e criptografia).</td><td><code><?php echo base64_encode($texto); ?></code></td></tr>
-                    <tr><td><code>openssl_encrypt()</code></td><td>AES-256-CBC</td><td>Criptografia simetrica reversivel com chave.</td><td><code><?php echo openssl_encrypt($texto, "AES-256-CBC", $chave, 0, $iv); ?></code></td></tr>
+                    <tr><td><code>openssl_encrypt()</code></td><td>AES-256-CBC</td><td>Criptografia simetrica reversivel com chave.</td><td><code><?php echo function_exists('openssl_encrypt') ? openssl_encrypt($texto, "AES-256-CBC", $chave, 0, $iv) : 'Extensao OpenSSL nao habilitada'; ?></code></td></tr>
                 </tbody>
             </table>
+        </section>
+        <section class="intro explicacao">
+            <h2>Resumo das técnicas</h2>
+
+            <p>
+                <strong>MD5 e SHA1:</strong> são funções de hash. Elas transformam o texto em um
+                código de tamanho fixo, mas não permitem recuperar o texto original. São métodos
+                antigos e não devem ser usados para proteger senhas.
+            </p>
+
+            <p>
+                <strong>SHA-256 e password_hash():</strong> também geram hashes, mas são opções mais
+                adequadas. O <code>password_hash()</code> foi feito especialmente para armazenar senhas
+                com mais segurança.
+            </p>
+
+            <p>
+                <strong>Base64:</strong> não é criptografia. É apenas uma codificação usada para
+                representar dados em outro formato e pode ser revertida facilmente.
+            </p>
+
+            <p>
+                <strong>AES:</strong> é a criptografia desta página. O texto é protegido com uma
+                chave e pode ser recuperado depois usando a chave correta. Neste computador, a
+                extensão OpenSSL precisa estar habilitada para gerar o resultado do AES.
+            </p>
         </section>
     </main>
     <footer><p>Produzido por: Otavio Giovanelli Biazzi, Pedro Henrique Miranda, Laura Cristina Cruz e Pedro Henrique Dalle Molle Godoi</p></footer>
