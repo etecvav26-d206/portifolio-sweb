@@ -47,26 +47,11 @@ h2 {
     margin: 0 0 10px;
 }
 
-.section-kicker {
-    color: #1e293b;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-}
-
 .nota {
-    background: #eef2f7;
-    border-left: 4px solid #64748b;
     color: #475569;
-    padding: 12px 16px;
     margin-bottom: 24px;
     font-size: 13px;
     line-height: 1.5;
-}
-
-.nota code {
-    font-size: 12px;
 }
 
 .form-section {
