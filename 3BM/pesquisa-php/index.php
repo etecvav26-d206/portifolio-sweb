@@ -48,6 +48,6 @@ $iv    = "1234567890123456";
             </table>
         </section>
     </main>
-    <footer><p>Produzido por: Otavio Giovanelli Biazzi e Pedro Henrique Miranda</p></footer>
+    <footer><p>Produzido por: Otavio Giovanelli Biazzi, Pedro Henrique Miranda, Laura Cristina Cruz e Pedro Henrique Dalle Molle Godoi</p></footer>
 </body>
 </html>
