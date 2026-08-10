@@ -48,25 +48,31 @@ $iv    = "1234567890123456";
             <h2>Resumo das técnicas</h2>
 
             <p>
-                <strong>MD5 e SHA1:</strong> são funções de hash. Elas transformam o texto em um
-                código de tamanho fixo, mas não permitem recuperar o texto original. São métodos
-                antigos e não devem ser usados para proteger senhas.
+                <strong>MD5 e SHA1:</strong> são funções de hash que transformam o texto em um
+                código de tamanho fixo. Podem ser usados para demonstrações ou para verificar
+                arquivos antigos, mas não devem ser usados para proteger informações importantes,
+                porque já existem formas conhecidas de encontrar colisões nesses algoritmos.
             </p>
 
             <p>
-                <strong>SHA-256 e password_hash():</strong> também geram hashes, mas são opções mais
-                adequadas. O <code>password_hash()</code> foi feito especialmente para armazenar senhas
-                com mais segurança.
+                <strong>SHA-256 e password_hash():</strong> também geram hashes, mas têm finalidades
+                diferentes. O SHA-256 é útil para verificar a integridade de dados, enquanto o
+                <code>password_hash()</code> foi feito para armazenar senhas com salt e mais segurança.
+                Para conferir uma senha, usamos <code>password_verify()</code>.
             </p>
 
             <p>
-                <strong>Base64:</strong> não é criptografia. É apenas uma codificação usada para
-                representar dados em outro formato e pode ser revertida facilmente.
+                <strong>Base64:</strong> não é criptografia. É uma codificação usada para representar
+                dados em outro formato, sendo útil no transporte de textos e arquivos em sistemas
+                que aceitam apenas caracteres específicos. Como pode ser revertida facilmente, não
+                deve ser usada como proteção.
             </p>
 
             <p>
-                <strong>AES:</strong> é a criptografia desta página. O texto é protegido com uma chave
-                e pode ser recuperado depois usando a chave correta. Neste computador, a extensão
+                <strong>AES:</strong> é a criptografia desta página. Deve ser usado quando precisamos
+                proteger dados e recuperá-los depois, como mensagens ou arquivos. O texto é protegido
+                com uma chave e só pode ser recuperado com a chave correta. Em um sistema real, a chave
+                e o IV precisam ser gerados e armazenados com segurança. Neste computador, a extensão
                 OpenSSL precisa estar habilitada para gerar o resultado do AES.
             </p>
         </section>
