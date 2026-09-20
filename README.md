@@ -37,4 +37,12 @@ O objetivo é registrar os projetos criados pelo grupo e praticar conceitos fund
 * **HTML5**
 * **PHP**
 
+## 📌 Entregas do 3º bimestre
+
+- [Análise do GitHub — SWEB](3BM/analise-github.md)
+- [Página PHP de criptografias](3BM/pesquisa-php/index.php)
+- [Projeto principal da pizzaria — Papa's Magleoni](https://github.com/etecvav26-d206/Papa-s-Magleoni)
+
+O projeto da pizzaria possui uma página pública para o cliente e três CRUDs administrativos em PHP com PDO/MySQL: pizzas, categorias e depoimentos.
+
 ---
