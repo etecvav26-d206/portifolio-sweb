@@ -14,6 +14,8 @@ Durante a atividade, percebemos que Base64 apenas representa o texto em outro fo
 
 O projeto principal está no repositório [`Papa-s-Magleoni`](https://github.com/etecvav26-d206/Papa-s-Magleoni). O site possui uma página pública para o cliente, disponível em [`index.php`](https://github.com/etecvav26-d206/Papa-s-Magleoni/blob/main/index.php), e uma área administrativa conectada ao MySQL por PDO.
 
+Para apresentar o desenvolvimento com mais detalhes, preparamos o [relatório do projeto no portfólio](projeto-pizzaria/relatorio-projeto-pizzaria.md), com imagens da parte pública e dos três CRUDs. O repositório principal também possui uma [cópia própria do relatório](https://github.com/etecvav26-d206/Papa-s-Magleoni/blob/main/docs/RELATORIO-PROJETO.md).
+
 Os três CRUDs completos são:
 
 - [CRUD de pizzas](https://github.com/etecvav26-d206/Papa-s-Magleoni/blob/main/gerenciar.php);
@@ -32,4 +34,5 @@ Ao comparar a página de criptografias com o projeto da pizzaria, entendemos que
 
 - [Portfólio SWEB](https://github.com/etecvav26-d206/portifolio-sweb)
 - [Projeto Papa's Magleoni](https://github.com/etecvav26-d206/Papa-s-Magleoni)
+- [Relatório do projeto da pizzaria](projeto-pizzaria/relatorio-projeto-pizzaria.md)
 - [Requisitos oficiais de SWEB](https://github.com/ronildo-ferreira/ronildo-human-layer/tree/main/01-EtecVAV/2D/sweb-sistemas-web/3BIM)

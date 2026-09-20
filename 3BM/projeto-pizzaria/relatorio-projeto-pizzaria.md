@@ -62,3 +62,18 @@ O terceiro CRUD administra os comentários apresentados na página inicial. Pode
 A área administrativa exige login e utiliza sessão para impedir o acesso direto às telas internas. Também aplicamos escape na saída dos dados e consultas preparadas no banco. A separação entre páginas públicas, painel, conexão e arquivos visuais deixou o projeto mais fácil de entender e manter.
 
 O layout foi preparado para se adaptar a diferentes tamanhos de tela. Na parte pública, o menu, os cartões e as seções se reorganizam em telas menores; no painel, as tabelas continuam acessíveis com rolagem quando necessário.
+
+## Testes realizados
+
+Executamos o projeto localmente com PHP e MySQL, importamos o banco de dados e verificamos a página inicial, o cardápio e o login administrativo. Depois do acesso ao painel, conferimos as listagens dos três CRUDs e a comunicação com o banco. As imagens deste relatório foram capturadas durante essa verificação.
+
+## Conclusão
+
+O projeto nos ajudou a juntar interface, programação PHP e persistência de dados em uma aplicação completa. Na prática, entendemos melhor o caminho percorrido por uma informação: ela é preenchida no formulário, validada pelo sistema, gravada no MySQL por meio do PDO e depois apresentada novamente no site.
+
+## Links da entrega
+
+- [Repositório principal Papa-s-Magleoni](https://github.com/etecvav26-d206/Papa-s-Magleoni)
+- [Relatório dentro do repositório principal](https://github.com/etecvav26-d206/Papa-s-Magleoni/blob/main/docs/RELATORIO-PROJETO.md)
+- [Portfólio de Sistemas Web](https://github.com/etecvav26-d206/portifolio-sweb)
+- [Análise das atividades de SWEB](../analise-github.md)
