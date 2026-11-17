@@ -68,6 +68,20 @@ CREATE TABLE itens_venda (
     FOREIGN KEY (produto_id) REFERENCES produtos(id)
 );
 
+-- -----------------------------------------------------
+-- 5) GASTOS
+-- -----------------------------------------------------
+CREATE TABLE gastos (
+    id          INT AUTO_INCREMENT PRIMARY KEY,
+    descricao   VARCHAR(150) NOT NULL,
+    valor       DECIMAL(10,2) NOT NULL,
+    categoria   VARCHAR(50)  NOT NULL,
+    data_gasto  DATE NOT NULL,
+    usuario_id  INT NOT NULL,                      -- quem registrou
+    criado_em   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
 -- =====================================================
 --  DADOS INICIAIS (para testar e apresentar)
 -- =====================================================
