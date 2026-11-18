@@ -65,6 +65,12 @@ body.interno { display: flex; min-height: 100vh; }
 .menu-lateral nav a {
     color: #d2d2d2; padding: 9px 12px; border-radius: 8px;
 }
+.menu-lateral nav a:hover { background: var(--tinta-2); color: #fff; text-decoration: none; }
+.menu-lateral nav a.ativo { background: var(--ciano); color: #fff; font-weight: 600; }
+.menu-titulo {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+    color: #8a8a8a; margin: 16px 12px 6px;
+}
 
 .usuario-box {
     border-top: 1px solid var(--tinta-2); padding: 16px 8px 0;
