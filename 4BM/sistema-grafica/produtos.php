@@ -37,6 +37,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['acao'] ?? '') === 'salvar'
     ir('produtos.php');
 }
 
+// ---------- Inativar / reativar (só admin) ----------
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['acao'] ?? '') === 'situacao') {
+    if (!ehAdmin()) {
+        avisar('Somente o administrador pode inativar produtos.', 'erro');
+        ir('produtos.php');
+    }
+    $sql = $pdo->prepare('UPDATE produtos SET ativo = 1 - ativo WHERE id = ?');
+    $sql->execute([(int) $_POST['id']]);
+    avisar('Situação do produto alterada.');
+    ir('produtos.php' . (isset($_GET['inativos']) ? '?inativos=1' : ''));
+}
+
 // ---------- Produto que está sendo editado ----------
 $editando = null;
 if (!empty($_GET['editar'])) {
@@ -47,9 +59,13 @@ if (!empty($_GET['editar'])) {
 
 // ---------- Listagem com filtros ----------
 $busca = trim($_GET['busca'] ?? '');
+$mostrarInativos = isset($_GET['inativos']);
 
 $sql = 'SELECT * FROM produtos WHERE 1=1';
 $params = [];
+if (!$mostrarInativos) {
+    $sql .= ' AND ativo = 1';
+}
 if ($busca !== '') {
     $sql .= ' AND (nome LIKE ? OR categoria LIKE ?)';
     $params[] = "%$busca%";
@@ -133,6 +149,10 @@ require 'includes/header.php';
                 <label>Buscar</label>
                 <input type="text" name="busca" value="<?= e($busca) ?>" placeholder="Nome ou categoria">
             </div>
+            <label style="display:flex;gap:6px;align-items:center;font-weight:400">
+                <input type="checkbox" name="inativos" value="1" style="width:auto;margin:0" <?= $mostrarInativos ? 'checked' : '' ?>>
+                Mostrar inativos
+            </label>
             <button class="botao">Filtrar</button>
         </form>
 
@@ -161,12 +181,22 @@ require 'includes/header.php';
                                 <span class="selo selo-servico">Serviço</span>
                             <?php elseif ($p['estoque'] == 0): ?>
                                 <span class="selo selo-esgotado">Esgotado</span>
+                            <?php elseif ($p['estoque'] <= $p['estoque_minimo']): ?>
+                                <span class="selo selo-baixo"><?= $p['estoque'] ?> un.</span>
                             <?php else: ?>
                                 <span class="selo selo-ok"><?= $p['estoque'] ?> un.</span>
                             <?php endif; ?>
                         </td>
                         <td class="numero">
                             <a href="?editar=<?= $p['id'] ?>">Editar</a>
+                            <?php if (ehAdmin()): ?>
+                                &nbsp;
+                                <form method="post" class="inline">
+                                    <input type="hidden" name="acao" value="situacao">
+                                    <input type="hidden" name="id" value="<?= $p['id'] ?>">
+                                    <button class="botao-link"><?= $p['ativo'] ? 'Inativar' : 'Reativar' ?></button>
+                                </form>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
