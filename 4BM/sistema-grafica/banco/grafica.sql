@@ -108,6 +108,27 @@ INSERT INTO produtos (nome, categoria, tipo, preco, estoque, estoque_minimo) VAL
 ('Plastificação A4',                  'Acabamento',       'servico',  5.00, 0, 0),
 ('Banner 60x90 cm',                   'Impressão',        'servico', 55.00, 0, 0);
 
+-- Algumas vendas de exemplo nos últimos dias
+INSERT INTO vendas (usuario_id, total, data_venda) VALUES
+(2, 54.80, DATE_SUB(NOW(), INTERVAL 6 DAY)),
+(2, 25.00, DATE_SUB(NOW(), INTERVAL 5 DAY)),
+(1, 90.00, DATE_SUB(NOW(), INTERVAL 4 DAY)),
+(2, 38.00, DATE_SUB(NOW(), INTERVAL 3 DAY)),
+(2, 165.00, DATE_SUB(NOW(), INTERVAL 2 DAY)),
+(1, 135.00, DATE_SUB(NOW(), INTERVAL 1 DAY));
+
+INSERT INTO itens_venda (venda_id, produto_id, quantidade, preco_unitario, subtotal) VALUES
+(1, 1, 2, 24.90, 49.80),
+(1, 2, 2,  2.50,  5.00),
+(2, 9, 50, 0.50, 25.00),
+(3, 7, 2, 45.00, 90.00),
+(4, 10, 15, 2.00, 30.00),
+(4, 11, 1,  8.00,  8.00),
+(5, 13, 3, 55.00, 165.00),
+(6, 7, 3, 45.00, 135.00);
+
+UPDATE vendas SET observacao = 'Trabalho de escola - cliente volta para buscar' WHERE id = 4;
+
 INSERT INTO gastos (descricao, valor, categoria, data_gasto, usuario_id) VALUES
 ('Tinta para impressora (kit 4 cores)', 180.00, 'Insumos',     DATE_SUB(CURDATE(), INTERVAL 4 DAY), 1),
 ('Conta de energia',                    95.00,  'Contas',      DATE_SUB(CURDATE(), INTERVAL 2 DAY), 1),

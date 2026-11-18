@@ -191,6 +191,9 @@ form.inline { display: inline; }
 .total-venda small { font-size: 14px; color: var(--texto-suave); font-weight: 400; display: block; }
 .remover { color: var(--vermelho); background: none; border: none; cursor: pointer; font-size: 18px; }
 
+details summary { cursor: pointer; color: var(--ciano); }
+details ul { margin: 8px 0 0 18px; font-size: 14px; color: var(--texto-suave); }
+
 .barra-linha { display: grid; grid-template-columns: 1fr 2fr auto; gap: 10px; align-items: center; margin-bottom: 10px; font-size: 14px; }
 .barra { background: #ecebe5; border-radius: 99px; height: 10px; overflow: hidden; }
 .barra i { display: block; height: 100%; background: var(--ciano); border-radius: 99px; }
