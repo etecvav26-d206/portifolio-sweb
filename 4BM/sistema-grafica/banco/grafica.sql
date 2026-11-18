@@ -107,3 +107,8 @@ INSERT INTO produtos (nome, categoria, tipo, preco, estoque, estoque_minimo) VAL
 ('Encadernação espiral',              'Acabamento',       'servico',  8.00, 0, 0),
 ('Plastificação A4',                  'Acabamento',       'servico',  5.00, 0, 0),
 ('Banner 60x90 cm',                   'Impressão',        'servico', 55.00, 0, 0);
+
+INSERT INTO gastos (descricao, valor, categoria, data_gasto, usuario_id) VALUES
+('Tinta para impressora (kit 4 cores)', 180.00, 'Insumos',     DATE_SUB(CURDATE(), INTERVAL 4 DAY), 1),
+('Conta de energia',                    95.00,  'Contas',      DATE_SUB(CURDATE(), INTERVAL 2 DAY), 1),
+('Manutenção da impressora laser',      60.00,  'Manutenção',  DATE_SUB(CURDATE(), INTERVAL 1 DAY), 1);
