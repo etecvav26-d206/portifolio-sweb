@@ -100,6 +100,29 @@ body.interno { display: flex; min-height: 100vh; }
 .grade-2 { grid-template-columns: 1fr 1fr; }
 .grade-form { grid-template-columns: 360px 1fr; align-items: start; }
 
+.indicadores { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.indicador {
+    background: var(--branco); border: 1px solid var(--borda); border-radius: var(--raio);
+    padding: 18px; box-shadow: var(--sombra); border-top: 4px solid var(--ciano);
+}
+.indicador:nth-child(2) { border-top-color: var(--magenta); }
+.indicador:nth-child(3) { border-top-color: var(--amarelo); }
+.indicador:nth-child(4) { border-top-color: var(--tinta); }
+.indicador span { color: var(--texto-suave); font-size: 13px; }
+.indicador strong { display: block; font-size: 24px; color: var(--tinta); margin-top: 4px; }
+.indicador small { color: var(--texto-suave); }
+.positivo { color: var(--verde) !important; }
+.negativo { color: var(--vermelho) !important; }
+
+.atalhos { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.atalho {
+    background: var(--branco); border: 1px solid var(--borda); border-radius: var(--raio);
+    padding: 20px; color: var(--texto); box-shadow: var(--sombra); transition: transform .15s;
+}
+.atalho:hover { transform: translateY(-2px); text-decoration: none; border-color: var(--ciano); }
+.atalho strong { display: block; color: var(--tinta); font-size: 16px; margin-bottom: 4px; }
+.atalho span { color: var(--texto-suave); font-size: 14px; }
+
 .tabela-box { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; }
 th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--borda); vertical-align: middle; }
