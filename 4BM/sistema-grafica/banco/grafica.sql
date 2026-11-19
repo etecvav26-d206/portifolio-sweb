@@ -133,3 +133,15 @@ INSERT INTO gastos (descricao, valor, categoria, data_gasto, usuario_id) VALUES
 ('Tinta para impressora (kit 4 cores)', 180.00, 'Insumos',     DATE_SUB(CURDATE(), INTERVAL 4 DAY), 1),
 ('Conta de energia',                    95.00,  'Contas',      DATE_SUB(CURDATE(), INTERVAL 2 DAY), 1),
 ('Manutenção da impressora laser',      60.00,  'Manutenção',  DATE_SUB(CURDATE(), INTERVAL 1 DAY), 1);
+
+-- Fotos dos produtos (arquivos em assets/img/produtos/)
+UPDATE produtos SET imagem = 'produto_1_1795099729.jpg'  WHERE id = 1;
+UPDATE produtos SET imagem = 'produto_2_1795099730.jpg'  WHERE id = 2;
+UPDATE produtos SET imagem = 'produto_3_1795099730.jpg'  WHERE id = 3;
+UPDATE produtos SET imagem = 'produto_4_1795099730.jpg'  WHERE id = 4;
+UPDATE produtos SET imagem = 'produto_5_1795099730.jpg'  WHERE id = 5;
+UPDATE produtos SET imagem = 'produto_6_1795099730.jpg'  WHERE id = 6;
+UPDATE produtos SET imagem = 'produto_9_1795099730.jpg'  WHERE id = 9;
+UPDATE produtos SET imagem = 'produto_10_1795099730.jpg' WHERE id = 10;
+UPDATE produtos SET imagem = 'produto_11_1795099730.jpg' WHERE id = 11;
+UPDATE produtos SET imagem = 'produto_12_1795099730.jpg' WHERE id = 12;
