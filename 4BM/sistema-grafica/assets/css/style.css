@@ -183,6 +183,42 @@ form.inline { display: inline; }
 .login-box .subtitulo { text-align: center; }
 .login-box .botao { width: 100%; }
 
+.hero { text-align: center; margin-bottom: 30px; }
+.hero h1 { font-size: 32px; }
+.categorias { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 28px; }
+.categorias a {
+    padding: 7px 16px; border-radius: 99px; background: var(--branco);
+    border: 1px solid var(--borda); color: var(--tinta);
+}
+.categorias a.ativo { background: var(--tinta); color: #fff; border-color: var(--tinta); }
+.categorias a:hover { text-decoration: none; border-color: var(--tinta); }
+.vitrine { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
+.produto-card {
+    background: var(--branco); border: 1px solid var(--borda); border-radius: var(--raio);
+    padding: 18px; box-shadow: var(--sombra); display: flex; flex-direction: column; gap: 6px;
+}
+.produto-card .categoria { font-size: 12px; color: var(--texto-suave); text-transform: uppercase; letter-spacing: .5px; }
+.produto-card h3 { font-size: 16px; color: var(--tinta); flex: 1; }
+.produto-card .preco { font-size: 20px; font-weight: 700; color: var(--tinta); }
+.produto-card.indisponivel { opacity: .6; }
+
+.hero-foto {
+    background-size: cover; background-position: center;
+    border-radius: var(--raio); padding: 70px 24px 40px; position: relative; overflow: hidden;
+}
+.hero-foto::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.8));
+}
+.hero-foto > * { position: relative; }
+.hero-foto h1 { color: #fff; }
+.hero-foto .subtitulo { color: #e4e7ee; }
+
+.login-foto {
+    height: 200px; max-width: 760px; margin: 0 auto -10px;
+    background-size: cover; background-position: center; border-radius: var(--raio);
+}
+
 .adicionar-item { display: flex; gap: 10px; align-items: flex-end; }
 .adicionar-item > div:first-child { flex: 1; }
 .adicionar-item input, .adicionar-item select { margin-bottom: 0; }

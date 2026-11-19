@@ -1,0 +1,10 @@
+Coloque aqui as imagens reais (com estes nomes exatos):
+
+  logo.png     -> logo da ETEC VAV ou da APM
+                  (aparece no topo do site e no menu lateral)
+
+  fachada.jpg  -> foto da escola ou da gráfica
+                  (aparece no catálogo público e na tela de login)
+
+Se o arquivo não existir, o site usa o visual padrão automaticamente.
+Dica: prefira fotos tiradas pelo próprio grupo ou imagens oficiais da escola.
