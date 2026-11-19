@@ -7,6 +7,42 @@
 require 'includes/auth.php';
 exigirLogin();
 
+// Salva a foto enviada e devolve o nome do arquivo (ou null se não veio foto)
+function salvarFoto($idProduto) {
+    if (empty($_FILES['imagem']) || $_FILES['imagem']['error'] === UPLOAD_ERR_NO_FILE) {
+        return null;
+    }
+    $arquivo = $_FILES['imagem'];
+
+    if ($arquivo['error'] !== UPLOAD_ERR_OK) {
+        throw new Exception('Não foi possível enviar a foto.');
+    }
+    if ($arquivo['size'] > 3 * 1024 * 1024) {
+        throw new Exception('A foto pode ter no máximo 3 MB.');
+    }
+
+    // Confere se é mesmo uma imagem (não só pela extensão)
+    $permitidos = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
+    $info = @getimagesize($arquivo['tmp_name']);
+    if (!$info || !isset($permitidos[$info['mime']])) {
+        throw new Exception('Envie uma foto JPG, PNG ou WEBP.');
+    }
+
+    $pasta = __DIR__ . '/assets/img/produtos/';
+    if (!is_dir($pasta)) {
+        mkdir($pasta, 0777, true);
+    }
+    $nome = 'produto_' . $idProduto . '_' . time() . '.' . $permitidos[$info['mime']];
+    move_uploaded_file($arquivo['tmp_name'], $pasta . $nome);
+    return $nome;
+}
+
+function apagarFoto($nome) {
+    if ($nome && is_file(__DIR__ . '/assets/img/produtos/' . $nome)) {
+        unlink(__DIR__ . '/assets/img/produtos/' . $nome);
+    }
+}
+
 // ---------- Salvar (novo ou edição) ----------
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['acao'] ?? '') === 'salvar') {
     $id        = (int) ($_POST['id'] ?? 0);
@@ -33,7 +69,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['acao'] ?? '') === 'salvar'
         $mensagem = "Produto \"$nome\" cadastrado.";
     }
 
+    // Foto (opcional): se mandou uma nova, troca a antiga
+    try {
+        $sql = $pdo->prepare('SELECT imagem FROM produtos WHERE id = ?');
+        $sql->execute([$id]);
+        $fotoAntiga = $sql->fetchColumn();
+
+        if (!empty($_POST['remover_foto'])) {
+            apagarFoto($fotoAntiga);
+            $pdo->prepare('UPDATE produtos SET imagem = NULL WHERE id = ?')->execute([$id]);
+        }
+
+        $novaFoto = salvarFoto($id);
+        if ($novaFoto) {
+            apagarFoto($fotoAntiga);
+            $pdo->prepare('UPDATE produtos SET imagem = ? WHERE id = ?')->execute([$novaFoto, $id]);
+        }
         avisar($mensagem);
+    } catch (Exception $erro) {
+        avisar($mensagem . ' Mas a foto não foi salva: ' . $erro->getMessage(), 'erro');
+    }
     ir('produtos.php');
 }
 
@@ -132,6 +187,15 @@ require 'includes/header.php';
             </div>
             <p class="dica" id="dica-servico" style="display:none">Serviços (impressão, encadernação...) não usam estoque.</p>
 
+            <label>Foto (opcional)</label>
+            <?php if (!empty($editando['imagem'])): ?>
+                <img class="foto-previa" src="assets/img/produtos/<?= e($editando['imagem']) ?>" alt="">
+                <label style="display:flex;gap:6px;font-weight:400;margin-bottom:10px">
+                    <input type="checkbox" name="remover_foto" value="1" style="width:auto;margin:0"> Remover foto atual
+                </label>
+            <?php endif; ?>
+            <input type="file" name="imagem" accept="image/jpeg,image/png,image/webp">
+            <p class="dica">JPG, PNG ou WEBP de até 3 MB. Aparece no catálogo público.</p>
 
             <div class="acoes">
                 <button class="botao botao-destaque"><?= $editando ? 'Salvar alterações' : 'Cadastrar' ?></button>
@@ -170,6 +234,11 @@ require 'includes/header.php';
                 <?php foreach ($produtos as $p): ?>
                     <tr class="<?= $p['ativo'] ? '' : 'inativo' ?>">
                         <td class="celula-produto">
+                            <?php if ($p['imagem']): ?>
+                                <img class="miniatura" src="assets/img/produtos/<?= e($p['imagem']) ?>" alt="">
+                            <?php else: ?>
+                                <span class="miniatura miniatura-vazia"><?= e(mb_substr($p['nome'], 0, 1)) ?></span>
+                            <?php endif; ?>
                             <div>
                             <strong><?= e($p['nome']) ?></strong><br>
                             <small><?= e($p['categoria']) ?><?= $p['ativo'] ? '' : ' · INATIVO' ?></small>
