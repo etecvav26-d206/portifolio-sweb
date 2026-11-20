@@ -165,6 +165,13 @@ foreach ($r['mais_vendidos'] as $p) {
 }
 $pdf->Tabela(['Produto / serviço', 'Quantidade', 'Valor'], $linhas, [120, 30, 40], ['L', 'R', 'R']);
 
+$pdf->Titulo('Vendas por funcionário');
+$linhas = [];
+foreach ($r['por_funcionario'] as $f) {
+    $linhas[] = [$f['nome'], $f['qtd'], dinheiro($f['total'])];
+}
+$pdf->Tabela(['Funcionário', 'Vendas', 'Total'], $linhas, [120, 30, 40], ['L', 'R', 'R']);
+
 $pdf->Titulo('Gastos do período');
 $linhas = [];
 foreach ($gastos as $g) {
@@ -180,6 +187,18 @@ foreach ($vendas as $v) {
 }
 $pdf->Tabela(['Nº', 'Data', 'Funcionário', 'Total'], $linhas, [20, 40, 100, 30], ['L', 'L', 'L', 'R'],
              ['', '', 'Total', dinheiro($r['total_vendas'])]);
+
+// ---------- Assinatura ----------
+if ($pdf->GetY() > 245) {
+    $pdf->AddPage();
+}
+$pdf->Ln(18);
+$pdf->SetDrawColor(120);
+$pdf->Line(60, $pdf->GetY(), 150, $pdf->GetY());
+$pdf->Ln(2);
+$pdf->SetFont('Helvetica', '', 9);
+$pdf->SetTextColor(60);
+$pdf->Cell(0, 5, t('Responsável: ' . usuarioLogado()['nome']), 0, 1, 'C');
 
 // 'I' abre no navegador (dá para salvar ou imprimir de lá)
 $nomeArquivo = 'relatorio_' . $inicio . '_a_' . $fim . '.pdf';

@@ -43,6 +43,14 @@ function resumoPeriodo(PDO $pdo, $inicio, $fim) {
     $sql->execute([$inicio, $fim]);
     $r['gastos_categoria'] = $sql->fetchAll();
 
+    // Vendas por funcionário
+    $sql = $pdo->prepare('SELECT u.nome, COUNT(*) AS qtd, SUM(v.total) AS total
+                          FROM vendas v JOIN usuarios u ON u.id = v.usuario_id
+                          WHERE DATE(v.data_venda) BETWEEN ? AND ?
+                          GROUP BY u.id, u.nome ORDER BY total DESC');
+    $sql->execute([$inicio, $fim]);
+    $r['por_funcionario'] = $sql->fetchAll();
+
     return $r;
 }
 

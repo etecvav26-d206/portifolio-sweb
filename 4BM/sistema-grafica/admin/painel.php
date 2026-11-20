@@ -92,6 +92,19 @@ require '../includes/header.php';
     </div>
 
     <div class="cartao">
+        <h2>Vendas por funcionário</h2>
+        <table>
+            <tr><th>Funcionário</th><th class="numero">Vendas</th><th class="numero">Total</th></tr>
+            <?php foreach ($r['por_funcionario'] as $f): ?>
+                <tr><td><?= e($f['nome']) ?></td><td class="numero"><?= $f['qtd'] ?></td><td class="numero"><?= dinheiro($f['total']) ?></td></tr>
+            <?php endforeach; ?>
+            <?php if (!$r['por_funcionario']): ?>
+                <tr><td colspan="3" class="vazio">Sem vendas no mês.</td></tr>
+            <?php endif; ?>
+        </table>
+    </div>
+
+    <div class="cartao">
         <h2>Últimas vendas</h2>
         <table>
             <tr><th>Nº</th><th>Data</th><th>Funcionário</th><th class="numero">Total</th></tr>
