@@ -1,3 +1,7 @@
+/* =====================================================
+   Sistema de Gestão - Gráfica
+   Paleta nas cores da ETEC VAV: preto, vermelho e branco
+   ===================================================== */
 
 :root {
     --tinta: #141414;        /* preto - cor principal */
@@ -36,6 +40,7 @@ h1 { font-size: 26px; margin-bottom: 4px; color: var(--tinta); }
 h2 { font-size: 18px; margin-bottom: 14px; color: var(--tinta); }
 .subtitulo { color: var(--texto-suave); margin-bottom: 24px; }
 
+/* ---------- Logo ---------- */
 .logo {
     display: flex; align-items: center; gap: 10px;
     font-weight: 700; font-size: 18px; color: inherit;
@@ -48,8 +53,10 @@ h2 { font-size: 18px; margin-bottom: 14px; color: var(--tinta); }
 .logo-cmyk i:nth-child(3) { background: var(--amarelo); }
 .logo-cmyk i:nth-child(4) { background: #fff; }
 
+/* Logo com imagem real */
 .logo-img { height: 34px; width: auto; }
 
+/* ---------- Layout interno (com menu lateral) ---------- */
 body.interno { display: flex; min-height: 100vh; }
 
 .menu-lateral {
@@ -80,6 +87,7 @@ body.interno { display: flex; min-height: 100vh; }
 
 .conteudo { flex: 1; padding: 32px 40px; max-width: 1200px; }
 
+/* ---------- Layout público ---------- */
 .topo-publico {
     background: var(--tinta); border-bottom: 4px solid var(--ciano);
     padding: 14px 40px; display: flex; justify-content: space-between; align-items: center;
@@ -91,6 +99,7 @@ body.interno { display: flex; min-height: 100vh; }
 .conteudo-publico { max-width: 1100px; margin: 0 auto; padding: 32px 24px; min-height: 70vh; }
 .rodape-publico { text-align: center; color: var(--texto-suave); padding: 24px; font-size: 13px; }
 
+/* ---------- Cartões e grade ---------- */
 .cartao {
     background: var(--branco); border: 1px solid var(--borda);
     border-radius: var(--raio); padding: 22px; box-shadow: var(--sombra);
@@ -100,6 +109,7 @@ body.interno { display: flex; min-height: 100vh; }
 .grade-2 { grid-template-columns: 1fr 1fr; }
 .grade-form { grid-template-columns: 360px 1fr; align-items: start; }
 
+/* Indicadores do painel */
 .indicadores { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; margin-bottom: 24px; }
 .indicador {
     background: var(--branco); border: 1px solid var(--borda); border-radius: var(--raio);
@@ -114,6 +124,7 @@ body.interno { display: flex; min-height: 100vh; }
 .positivo { color: var(--verde) !important; }
 .negativo { color: var(--vermelho) !important; }
 
+/* Atalhos da página inicial */
 .atalhos { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
 .atalho {
     background: var(--branco); border: 1px solid var(--borda); border-radius: var(--raio);
@@ -123,6 +134,7 @@ body.interno { display: flex; min-height: 100vh; }
 .atalho strong { display: block; color: var(--tinta); font-size: 16px; margin-bottom: 4px; }
 .atalho span { color: var(--texto-suave); font-size: 14px; }
 
+/* ---------- Tabelas ---------- */
 .tabela-box { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; }
 th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--borda); vertical-align: middle; }
@@ -132,6 +144,7 @@ td.numero, th.numero { text-align: right; white-space: nowrap; }
 tr.inativo td { color: #aaa; }
 tfoot td { font-weight: 700; border-bottom: none; }
 
+/* ---------- Formulários ---------- */
 label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 4px; color: var(--tinta); }
 input, select, textarea {
     width: 100%; padding: 9px 11px; border: 1px solid #cfccc2; border-radius: 8px;
@@ -146,6 +159,7 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--ciano); bor
 .filtros > div { min-width: 160px; }
 .filtros input, .filtros select { margin-bottom: 0; }
 
+/* ---------- Botões ---------- */
 .botao {
     display: inline-block; background: var(--tinta); color: #fff; border: none;
     padding: 10px 18px; border-radius: 8px; font: inherit; font-weight: 600;
@@ -163,6 +177,7 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--ciano); bor
 .acoes { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 form.inline { display: inline; }
 
+/* ---------- Selos (badges) ---------- */
 .selo {
     display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: 12px; font-weight: 600;
     background: #ecebe5; color: var(--tinta); width: fit-content;
@@ -173,16 +188,19 @@ form.inline { display: inline; }
 .selo-esgotado { background: #fbe0e0; color: var(--vermelho); }
 .selo-servico { background: #f1f1f1; color: #333; }
 
+/* ---------- Avisos ---------- */
 .aviso { padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-weight: 500; }
 .aviso-sucesso { background: #dcf3e5; color: #17663a; }
 .aviso-erro { background: #fbe0e0; color: #9b2c2c; }
 .vazio { text-align: center; color: var(--texto-suave); padding: 30px; }
 
+/* ---------- Login ---------- */
 .login-box { max-width: 380px; margin: 40px auto; }
 .login-box h1 { text-align: center; }
 .login-box .subtitulo { text-align: center; }
 .login-box .botao { width: 100%; }
 
+/* ---------- Catálogo público ---------- */
 .hero { text-align: center; margin-bottom: 30px; }
 .hero h1 { font-size: 32px; }
 .categorias { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 28px; }
@@ -202,6 +220,7 @@ form.inline { display: inline; }
 .produto-card .preco { font-size: 20px; font-weight: 700; color: var(--tinta); }
 .produto-card.indisponivel { opacity: .6; }
 
+/* Catálogo com foto real de fundo */
 .hero-foto {
     background-size: cover; background-position: center;
     border-radius: var(--raio); padding: 70px 24px 40px; position: relative; overflow: hidden;
@@ -214,11 +233,13 @@ form.inline { display: inline; }
 .hero-foto h1 { color: #fff; }
 .hero-foto .subtitulo { color: #e4e7ee; }
 
+/* Foto no topo da tela de login */
 .login-foto {
     height: 200px; max-width: 760px; margin: 0 auto -10px;
     background-size: cover; background-position: center; border-radius: var(--raio);
 }
 
+/* Fotos dos produtos */
 .produto-foto {
     width: calc(100% + 36px); margin: -18px -18px 8px; height: 160px;
     object-fit: cover; border-radius: var(--raio) var(--raio) 0 0; display: block;
@@ -236,6 +257,7 @@ form.inline { display: inline; }
 }
 .foto-previa { width: 100%; max-height: 160px; object-fit: cover; border-radius: 8px; margin-bottom: 8px; }
 
+/* ---------- Nova venda ---------- */
 .adicionar-item { display: flex; gap: 10px; align-items: flex-end; }
 .adicionar-item > div:first-child { flex: 1; }
 .adicionar-item input, .adicionar-item select { margin-bottom: 0; }
@@ -244,13 +266,16 @@ form.inline { display: inline; }
 .total-venda small { font-size: 14px; color: var(--texto-suave); font-weight: 400; display: block; }
 .remover { color: var(--vermelho); background: none; border: none; cursor: pointer; font-size: 18px; }
 
+/* Detalhes da venda no histórico */
 details summary { cursor: pointer; color: var(--ciano); }
 details ul { margin: 8px 0 0 18px; font-size: 14px; color: var(--texto-suave); }
 
+/* Barras do painel (produtos mais vendidos) */
 .barra-linha { display: grid; grid-template-columns: 1fr 2fr auto; gap: 10px; align-items: center; margin-bottom: 10px; font-size: 14px; }
 .barra { background: #ecebe5; border-radius: 99px; height: 10px; overflow: hidden; }
 .barra i { display: block; height: 100%; background: var(--ciano); border-radius: 99px; }
 
+/* ---------- Celular / tela pequena ---------- */
 @media (max-width: 860px) {
     body.interno { flex-direction: column; }
     .menu-lateral { width: 100%; height: auto; position: static; }
