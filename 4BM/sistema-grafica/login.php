@@ -23,7 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // password_verify compara a senha digitada com o hash salvo no banco
     if (!$usuario || !password_verify($senha, $usuario['senha'])) {
         $erro = 'Login ou senha incorretos.';
+    } elseif (!$usuario['ativo']) {
+        $erro = 'Esta conta está desativada. Fale com o administrador.';
     } else {
+        session_regenerate_id(true); // segurança: novo id de sessão após login
         $_SESSION['usuario'] = [
             'id'    => $usuario['id'],
             'nome'  => $usuario['nome'],

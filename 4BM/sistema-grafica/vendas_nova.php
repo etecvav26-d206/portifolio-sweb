@@ -219,6 +219,14 @@ function desenhar() {
     }
     document.getElementById('total').textContent = formatar(total);
 }
+
+// Não deixa confirmar venda vazia
+document.getElementById('form-venda').addEventListener('submit', function (evento) {
+    if (Object.keys(carrinho).length === 0) {
+        evento.preventDefault();
+        alert('Adicione pelo menos um item.');
+    }
+});
 </script>
 
 <?php require 'includes/footer.php'; ?>
