@@ -8,6 +8,7 @@ exigirLogin();
 $u = usuarioLogado();
 
 // Vendas de hoje feitas por este funcionário
+// (CURDATE() é a data de hoje no MySQL)
 $sql = $pdo->prepare('SELECT COUNT(*) AS qtd, COALESCE(SUM(total),0) AS soma
                       FROM vendas WHERE usuario_id = ? AND DATE(data_venda) = CURDATE()');
 $sql->execute([$u['id']]);
@@ -23,9 +24,11 @@ $pagina = 'inicio';
 require 'includes/header.php';
 ?>
 
+<?php // explode separa o nome nos espaços; [0] pega só o primeiro nome ?>
 <h1>Olá, <?= e(explode(' ', $u['nome'])[0]) ?>!</h1>
-<p class="subtitulo"><?= dataBr(date('Y-m-d')) ?> · O que vamos fazer agora?</p>
+<p class="subtitulo"><?= dataBr(date('Y-m-d')) ?></p>
 
+<!-- Três números rápidos para o funcionário -->
 <div class="indicadores">
     <div class="indicador">
         <span>Suas vendas hoje</span>
@@ -41,6 +44,7 @@ require 'includes/header.php';
     </div>
 </div>
 
+<!-- Atalhos para as telas mais usadas (o do painel só aparece para o admin) -->
 <div class="atalhos" style="margin-bottom:24px">
     <a class="atalho" href="vendas_nova.php">
         <strong>+ Nova venda</strong>
@@ -62,6 +66,7 @@ require 'includes/header.php';
     <?php endif; ?>
 </div>
 
+<?php // Lista de produtos que precisam de reposição (só aparece se tiver algum) ?>
 <?php if ($estoqueBaixo): ?>
     <div class="cartao">
         <h2>Atenção ao estoque</h2>

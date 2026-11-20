@@ -5,17 +5,20 @@
 require '../includes/auth.php';
 exigirAdmin();
 
+// Categorias sugeridas no formulário (o admin também pode digitar outra)
 $categoriasPadrao = ['Insumos', 'Manutenção', 'Contas', 'Mercadoria para revenda', 'Outros'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $acao = $_POST['acao'] ?? '';
 
+    // Novo gasto: descrição, valor, data e categoria (requisito 4.7)
     if ($acao === 'salvar') {
         $descricao = trim($_POST['descricao'] ?? '');
         $valor     = paraNumero($_POST['valor'] ?? 0);
         $categoria = trim($_POST['categoria'] ?? '');
         $data      = $_POST['data_gasto'] ?? '';
 
+        // strtotime devolve false se a data for inválida
         if ($descricao === '' || $valor <= 0 || $categoria === '' || !strtotime($data)) {
             avisar('Preencha todos os campos com valores válidos.', 'erro');
         } else {
@@ -32,11 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         avisar('Gasto excluído.');
     }
 
+    // Recarrega a página no mesmo mês (evita reenviar o formulário com F5)
     ir('gastos.php?mes=' . urlencode($_GET['mes'] ?? date('Y-m')));
 }
 
 // Mês exibido na lista (padrão: mês atual)
 $mes = $_GET['mes'] ?? date('Y-m');
+// Confere se o mês está no formato "2026-11"; se não estiver, usa o mês atual
 if (!preg_match('/^\d{4}-\d{2}$/', $mes)) {
     $mes = date('Y-m');
 }
@@ -49,6 +54,7 @@ $sql = $pdo->prepare('SELECT g.*, u.nome AS registrado_por FROM gastos g
                       ORDER BY g.data_gasto DESC, g.id DESC');
 $sql->execute([$inicio, $fim]);
 $gastos = $sql->fetchAll();
+// array_column pega só a coluna "valor" de cada gasto; array_sum soma tudo
 $total = array_sum(array_column($gastos, 'valor'));
 
 // Junta as categorias padrão com as que já foram usadas
@@ -62,7 +68,7 @@ require '../includes/header.php';
 ?>
 
 <h1>Gastos</h1>
-<p class="subtitulo">Registre as despesas da gráfica. Elas entram no painel e nos relatórios.</p>
+<p class="subtitulo">Despesas da gráfica.</p>
 
 <div class="grade grade-form">
     <div class="cartao">

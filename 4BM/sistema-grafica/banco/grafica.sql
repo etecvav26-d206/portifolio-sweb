@@ -44,6 +44,9 @@ CREATE TABLE produtos (
 
 -- -----------------------------------------------------
 -- 3) VENDAS (cabeçalho da venda)
+--    FOREIGN KEY (chave estrangeira) liga a venda ao
+--    funcionário que a registrou: o banco não deixa
+--    salvar uma venda com um usuario_id que não existe.
 -- -----------------------------------------------------
 CREATE TABLE vendas (
     id          INT AUTO_INCREMENT PRIMARY KEY,
@@ -56,6 +59,9 @@ CREATE TABLE vendas (
 
 -- -----------------------------------------------------
 -- 4) ITENS DA VENDA (o que foi vendido em cada venda)
+--    Uma venda pode ter vários itens (relação 1 para N).
+--    O preço é copiado para cá: se o preço do produto
+--    mudar depois, as vendas antigas não mudam.
 -- -----------------------------------------------------
 CREATE TABLE itens_venda (
     id              INT AUTO_INCREMENT PRIMARY KEY,
@@ -89,6 +95,7 @@ CREATE TABLE gastos (
 -- Usuários de teste
 --   admin / admin123   (administrador)
 --   maria / func123    (funcionária)
+-- As senhas abaixo já estão no formato de password_hash() ("$2y$10$...")
 INSERT INTO usuarios (nome, login, senha, nivel) VALUES
 ('Administrador', 'admin', '$2y$10$0oYNQkK/sQrQWzUvGGoHcuHKaYpNt74RyZFzwacdR80E1hK9p6iyW', 'admin'),
 ('Maria Souza',   'maria', '$2y$10$30gh2LL5lgdiU4UJS0lPweMIziJM.YELog/Y4fjDESdmfvocUs0LK', 'funcionario');
@@ -109,6 +116,8 @@ INSERT INTO produtos (nome, categoria, tipo, preco, estoque, estoque_minimo) VAL
 ('Banner 60x90 cm',                   'Impressão',        'servico', 55.00, 0, 0);
 
 -- Algumas vendas de exemplo nos últimos dias
+-- (DATE_SUB(NOW(), INTERVAL 6 DAY) = 6 dias antes da instalação,
+--  assim o painel sempre tem dados do mês na apresentação)
 INSERT INTO vendas (usuario_id, total, data_venda) VALUES
 (2, 54.80, DATE_SUB(NOW(), INTERVAL 6 DAY)),
 (2, 25.00, DATE_SUB(NOW(), INTERVAL 5 DAY)),

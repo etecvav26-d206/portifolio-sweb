@@ -10,6 +10,8 @@ $pagina  = $pagina  ?? '';
 $publico = $publico ?? false;
 $u = usuarioLogado();
 
+// Escreve um link do menu lateral. Se o $id do link for igual à $pagina
+// atual, ele recebe a classe "ativo" e fica destacado em vermelho.
 function itemMenu($link, $texto, $id, $pagina) {
     $classe = $id === $pagina ? ' class="ativo"' : '';
     echo "<a href=\"$link\"$classe>$texto</a>";
@@ -26,10 +28,14 @@ function itemMenu($link, $texto, $id, $pagina) {
         <link rel="icon" type="image/png" href="<?= $raiz ?>assets/img/logo.png">
     <?php endif; ?>
 </head>
+<!-- A classe do body muda o layout: "publico" (barra no topo) ou "interno" (menu lateral) -->
 <body class="<?= $publico ? 'publico' : 'interno' ?>">
 
 <?php if ($publico): ?>
+    <!-- ===== TOPO DAS PÁGINAS PÚBLICAS (catálogo e login) ===== -->
     <header class="topo-publico">
+        <!-- Se existir assets/img/logo.png usa a imagem; senão, desenha 4 quadradinhos com CSS -->
+
         <a class="logo" href="<?= $raiz ?>catalogo.php">
             <?php if (imagem('logo.png')): ?>
                 <img class="logo-img" src="<?= $raiz ?>assets/img/logo.png" alt="Logo">
@@ -50,6 +56,7 @@ function itemMenu($link, $texto, $id, $pagina) {
     <main class="conteudo-publico">
 
 <?php else: ?>
+    <!-- ===== MENU LATERAL DA ÁREA INTERNA (só aparece depois do login) ===== -->
     <aside class="menu-lateral">
         <a class="logo" href="<?= $raiz ?>inicio.php">
             <?php if (imagem('logo.png')): ?>
@@ -69,6 +76,9 @@ function itemMenu($link, $texto, $id, $pagina) {
             itemMenu($raiz . 'produtos.php',         'Produtos e estoque','produtos',  $pagina);
             ?>
 
+            <?php // Os links de administração só aparecem para o administrador.
+                  // Mesmo assim, cada página de admin/ também chama exigirAdmin(),
+                  // porque esconder o link não impede alguém de digitar o endereço. ?>
             <?php if (ehAdmin()): ?>
                 <span class="menu-titulo">Administração</span>
                 <?php
@@ -80,9 +90,10 @@ function itemMenu($link, $texto, $id, $pagina) {
             <?php endif; ?>
 
             <span class="menu-titulo">Site</span>
-            <a href="<?= $raiz ?>catalogo.php" target="_blank">Ver catálogo público ↗</a>
+            <a href="<?= $raiz ?>catalogo.php" target="_blank">Catálogo público</a>
         </nav>
 
+        <!-- Quem está logado, o nível e o botão de sair -->
         <div class="usuario-box">
             <strong><?= e($u['nome']) ?></strong>
             <span class="selo <?= $u['nivel'] === 'admin' ? 'selo-admin' : '' ?>">
@@ -94,4 +105,5 @@ function itemMenu($link, $texto, $id, $pagina) {
     <main class="conteudo">
 <?php endif; ?>
 
-<?php mostrarAviso(); ?>
+<?php // Mostra a mensagem de sucesso/erro da última ação (se houver)
+mostrarAviso(); ?>

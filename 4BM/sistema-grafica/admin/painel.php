@@ -7,8 +7,10 @@ require '../includes/auth.php';
 require '../includes/resumo.php';
 exigirAdmin();
 
+// Período do painel: do dia 1 do mês atual até hoje
 $inicio = date('Y-m-01');
 $fim    = date('Y-m-d');
+// Os cálculos ficam no includes/resumo.php (os mesmos usados no relatório)
 $r      = resumoPeriodo($pdo, $inicio, $fim);
 $baixo  = produtosEstoqueBaixo($pdo);
 
@@ -17,6 +19,7 @@ $ultimas = $pdo->query('SELECT v.id, v.total, v.data_venda, u.nome AS funcionari
                         FROM vendas v JOIN usuarios u ON u.id = v.usuario_id
                         ORDER BY v.data_venda DESC LIMIT 5')->fetchAll();
 
+// Nome do mês em português (date('n') devolve 1 a 12; a posição 0 fica vazia)
 $meses = ['', 'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
           'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
 
@@ -34,26 +37,23 @@ require '../includes/header.php';
     <a class="botao" href="relatorio.php">Gerar relatório</a>
 </div>
 
+<!-- Os 4 números principais do mês (requisito 4.6) -->
 <div class="indicadores">
     <div class="indicador">
-        <span>Total de vendas (ganhos)</span>
+        <span>Vendas</span>
         <strong><?= dinheiro($r['total_vendas']) ?></strong>
-        <small><?= $r['qtd_vendas'] ?> venda(s) · média <?= dinheiro($r['ticket_medio']) ?></small>
     </div>
     <div class="indicador">
-        <span>Gastos registrados</span>
+        <span>Gastos</span>
         <strong><?= dinheiro($r['total_gastos']) ?></strong>
-        <small><a href="gastos.php">ver gastos</a></small>
     </div>
     <div class="indicador">
         <span>Lucro estimado</span>
         <strong class="<?= $r['lucro'] >= 0 ? 'positivo' : 'negativo' ?>"><?= dinheiro($r['lucro']) ?></strong>
-        <small>vendas − gastos</small>
     </div>
     <div class="indicador">
-        <span>Estoque baixo</span>
-        <strong class="<?= $baixo ? 'negativo' : '' ?>"><?= count($baixo) ?></strong>
-        <small>produto(s) precisando de reposição</small>
+        <span>Quantidade de vendas</span>
+        <strong><?= $r['qtd_vendas'] ?></strong>
     </div>
 </div>
 
@@ -63,6 +63,8 @@ require '../includes/header.php';
         <?php if (!$r['mais_vendidos']): ?>
             <p class="vazio">Nenhuma venda este mês.</p>
         <?php else:
+            // Gráfico de barras feito só com CSS: o mais vendido ocupa 100%
+            // e os outros ficam proporcionais a ele
             $maior = max(array_column($r['mais_vendidos'], 'valor'));
             foreach ($r['mais_vendidos'] as $p): ?>
                 <div class="barra-linha">
@@ -116,8 +118,11 @@ require '../includes/header.php';
                     <td class="numero"><?= dinheiro($v['total']) ?></td>
                 </tr>
             <?php endforeach; ?>
+            <?php if (!$ultimas): ?>
+                <tr><td colspan="4" class="vazio">Nenhuma venda registrada ainda.</td></tr>
+            <?php endif; ?>
         </table>
-        <p style="margin-top:12px"><a href="../vendas_historico.php">Ver histórico completo →</a></p>
+        <p style="margin-top:12px"><a href="../vendas_historico.php">Ver histórico completo</a></p>
     </div>
 </div>
 

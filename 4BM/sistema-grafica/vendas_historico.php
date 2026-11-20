@@ -11,12 +11,13 @@ $inicio      = $_GET['inicio'] ?? date('Y-m-01');
 $fim         = $_GET['fim']    ?? date('Y-m-d');
 $funcionario = (int) ($_GET['funcionario'] ?? 0);
 
+// Busca as vendas do período junto com o nome de quem vendeu (JOIN com usuarios)
 $sql = 'SELECT v.*, u.nome AS funcionario
         FROM vendas v
         JOIN usuarios u ON u.id = v.usuario_id
         WHERE DATE(v.data_venda) BETWEEN ? AND ?';
 $params = [$inicio, $fim];
-if ($funcionario) {
+if ($funcionario) { // 0 = "Todos", então só filtra se escolheu alguém
     $sql .= ' AND v.usuario_id = ?';
     $params[] = $funcionario;
 }
@@ -26,7 +27,9 @@ $consulta = $pdo->prepare($sql);
 $consulta->execute($params);
 $vendas = $consulta->fetchAll();
 
-// Busca os itens de cada venda
+// Busca os itens de cada venda e soma o total do período.
+// O "&" em "&$v" permite alterar a venda dentro do foreach (acrescentando os itens);
+// o unset($v) depois é para não alterar a última venda sem querer.
 $buscaItens = $pdo->prepare('SELECT i.*, p.nome FROM itens_venda i
                              JOIN produtos p ON p.id = i.produto_id
                              WHERE i.venda_id = ?');
@@ -92,6 +95,7 @@ require 'includes/header.php';
                     <td>#<?= $v['id'] ?></td>
                     <td><?= dataBr($v['data_venda'], true) ?></td>
                     <td>
+                        <!-- <details> abre e fecha a lista de itens ao clicar, sem JavaScript -->
                         <details>
                             <summary><?= count($v['itens']) ?> item(ns)</summary>
                             <ul>

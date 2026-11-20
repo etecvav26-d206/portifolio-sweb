@@ -6,8 +6,11 @@
 require '../includes/auth.php';
 exigirAdmin();
 
-$eu = usuarioLogado();
+$eu = usuarioLogado(); // o administrador que está usando a página
 
+// A página tem dois formulários; o campo escondido "acao" diz qual foi enviado:
+//   "salvar"   -> cadastro ou edição de funcionário
+//   "situacao" -> desativar / reativar uma conta
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $acao = $_POST['acao'] ?? '';
     $id   = (int) ($_POST['id'] ?? 0);
@@ -16,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nome  = trim($_POST['nome'] ?? '');
         $login = trim($_POST['login'] ?? '');
         $senha = $_POST['senha'] ?? '';
+        // Só aceita os dois níveis que existem; qualquer outro valor vira "funcionario"
         $nivel = ($_POST['nivel'] ?? '') === 'admin' ? 'admin' : 'funcionario';
 
         // O admin não pode tirar o próprio acesso de administrador
@@ -28,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql->execute([$login, $id]);
         $loginRepetido = $sql->fetchColumn() > 0;
 
+        // Validações em ordem; a primeira que falhar mostra o aviso de erro
         if ($nome === '' || $login === '') {
             avisar('Preencha nome e login.', 'erro');
         } elseif ($loginRepetido) {
@@ -47,14 +52,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             avisar("Dados de $nome atualizados.");
             ir('funcionarios.php');
         } else {
+            // password_hash transforma a senha num código que não dá para desfazer;
+            // no banco nunca fica a senha verdadeira
             $sql = $pdo->prepare('INSERT INTO usuarios (nome, login, senha, nivel) VALUES (?,?,?,?)');
             $sql->execute([$nome, $login, password_hash($senha, PASSWORD_DEFAULT), $nivel]);
             avisar("$nome foi cadastrado(a).");
             ir('funcionarios.php');
         }
+        // Só chega aqui se alguma validação falhou: volta para o formulário
         ir('funcionarios.php' . ($id ? "?editar=$id" : ''));
     }
 
+    // Desativar em vez de excluir: as vendas antigas continuam mostrando quem vendeu
     if ($acao === 'situacao') {
         if ($id === (int) $eu['id']) {
             avisar('Você não pode desativar a sua própria conta.', 'erro');
@@ -74,6 +83,8 @@ if (!empty($_GET['editar'])) {
     $editando = $sql->fetch();
 }
 
+// Lista de todos os usuários. A subconsulta (SELECT COUNT(*) ...) conta
+// quantas vendas cada um já registrou.
 $usuarios = $pdo->query('SELECT u.*, (SELECT COUNT(*) FROM vendas v WHERE v.usuario_id = u.id) AS vendas
                          FROM usuarios u ORDER BY u.ativo DESC, u.nome')->fetchAll();
 
@@ -105,6 +116,7 @@ require '../includes/header.php';
                 <p class="dica">Deixe em branco para manter a senha atual.</p>
             <?php endif; ?>
 
+            <!-- Ao editar a própria conta, o nível fica travado (disabled) -->
             <label>Nível de acesso</label>
             <select name="nivel" <?= ($editando['id'] ?? 0) == $eu['id'] ? 'disabled' : '' ?>>
                 <option value="funcionario">Funcionário</option>

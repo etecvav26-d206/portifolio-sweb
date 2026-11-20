@@ -35,12 +35,16 @@ function t($texto) {
     return iconv('UTF-8', 'windows-1252//TRANSLIT', (string) $texto);
 }
 
-// Classe com cabeçalho e rodapé que se repetem em todas as páginas
+// Classe com cabeçalho e rodapé que se repetem em todas as páginas.
+// "extends FPDF" = herda tudo da biblioteca; aqui só reescrevemos
+// Header() e Footer(), que o FPDF chama sozinho a cada página nova.
+// Medidas em milímetros: a folha A4 tem 210mm, com 10mm de margem sobra 190mm.
+// Cell(largura, altura, texto, borda, quebra de linha, alinhamento, fundo)
 class RelatorioPDF extends FPDF {
     public $periodo = '';
 
     function Header() {
-        // Faixinha CMYK no topo
+        // Faixa colorida no topo (4 retângulos alternando vermelho e preto)
         $cores = [[200,16,46], [20,20,20], [200,16,46], [20,20,20]];  // vermelho e preto da ETEC
         foreach ($cores as $i => $c) {
             $this->SetFillColor($c[0], $c[1], $c[2]);
@@ -119,9 +123,10 @@ class RelatorioPDF extends FPDF {
     }
 }
 
+// ---------- Montagem do documento ----------
 $pdf = new RelatorioPDF();
 $pdf->periodo = 'Período: ' . dataBr($inicio) . ' a ' . dataBr($fim);
-$pdf->AliasNbPages();
+$pdf->AliasNbPages(); // permite escrever "Página 1 de {nb}" (total de páginas)
 $pdf->SetTitle(t('Relatório ' . dataBr($inicio) . ' a ' . dataBr($fim)));
 $pdf->SetMargins(10, 10, 10);
 $pdf->SetAutoPageBreak(true, 20);
@@ -134,6 +139,7 @@ $caixas = [
     ['Lucro estimado', dinheiro($r['lucro'])],
     ['Nº de vendas', (string) $r['qtd_vendas']],
 ];
+// Desenha as 4 caixas lado a lado: cada uma tem 46mm de largura e 2mm de espaço
 $y = $pdf->GetY();
 foreach ($caixas as $i => [$rotulo, $valor]) {
     $x = 10 + $i * 48;
@@ -145,7 +151,7 @@ foreach ($caixas as $i => [$rotulo, $valor]) {
     $pdf->Cell(40, 4, t($rotulo));
     $pdf->SetXY($x + 3, $y + 9);
     $pdf->SetFont('Helvetica', 'B', 13);
-    if ($i === 2) {
+    if ($i === 2) { // caixa do lucro: verde se positivo, vermelho se negativo
         $r['lucro'] >= 0 ? $pdf->SetTextColor(31, 157, 85) : $pdf->SetTextColor(214, 69, 69);
     } else {
         $pdf->SetTextColor(20, 20, 20);
@@ -189,6 +195,7 @@ $pdf->Tabela(['Nº', 'Data', 'Funcionário', 'Total'], $linhas, [20, 40, 100, 30
              ['', '', 'Total', dinheiro($r['total_vendas'])]);
 
 // ---------- Assinatura ----------
+// Se não couber no fim da página, a linha de assinatura vai para uma página nova
 if ($pdf->GetY() > 245) {
     $pdf->AddPage();
 }

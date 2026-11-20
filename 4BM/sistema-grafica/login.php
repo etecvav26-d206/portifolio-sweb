@@ -12,21 +12,27 @@ if (usuarioLogado()) {
 $erro = '';
 $loginDigitado = '';
 
+// O formulário foi enviado (o método POST só acontece quando clica em "Entrar")
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $loginDigitado = trim($_POST['login'] ?? '');
+    $loginDigitado = trim($_POST['login'] ?? ''); // trim tira espaços do começo e do fim
     $senha = $_POST['senha'] ?? '';
 
+    // Prepared statement: o "?" é trocado pelo valor com segurança,
+    // o que impede SQL Injection (ex.: digitar ' OR 1=1 -- no login)
     $sql = $pdo->prepare('SELECT * FROM usuarios WHERE login = ?');
     $sql->execute([$loginDigitado]);
     $usuario = $sql->fetch();
 
-    // password_verify compara a senha digitada com o hash salvo no banco
+    // password_verify compara a senha digitada com o hash salvo no banco.
+    // A mensagem é a mesma para login errado e senha errada, para não
+    // revelar quais logins existem no sistema.
     if (!$usuario || !password_verify($senha, $usuario['senha'])) {
         $erro = 'Login ou senha incorretos.';
     } elseif (!$usuario['ativo']) {
         $erro = 'Esta conta está desativada. Fale com o administrador.';
     } else {
         session_regenerate_id(true); // segurança: novo id de sessão após login
+        // Guarda na sessão só o necessário (nunca a senha)
         $_SESSION['usuario'] = [
             'id'    => $usuario['id'],
             'nome'  => $usuario['nome'],
@@ -37,8 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+// A partir daqui é o HTML da tela de login
 $titulo = 'Entrar';
-$publico = true;
+$publico = true; // usa o topo público (sem o menu lateral)
 require 'includes/header.php';
 ?>
 

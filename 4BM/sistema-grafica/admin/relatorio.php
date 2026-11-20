@@ -8,6 +8,8 @@ require '../includes/auth.php';
 require '../includes/resumo.php';
 exigirAdmin();
 
+// Período escolhido (padrão: mês atual). As datas vêm no formato "2026-11-20",
+// que pode ser comparado como texto: "2026-11-01" < "2026-11-20".
 $inicio = $_GET['inicio'] ?? date('Y-m-01');
 $fim    = $_GET['fim']    ?? date('Y-m-d');
 
@@ -24,7 +26,7 @@ require '../includes/header.php';
 ?>
 
 <h1>Relatórios</h1>
-<p class="subtitulo">Gere o relatório financeiro de um período em PDF para enviar à diretoria ou à APM.</p>
+<p class="subtitulo">Escolha o período e baixe o PDF para enviar à APM.</p>
 
 <div class="cartao">
     <form method="get" class="filtros">
@@ -37,25 +39,19 @@ require '../includes/header.php';
             <input type="date" name="fim" value="<?= e($fim) ?>" required>
         </div>
         <button class="botao">Atualizar prévia</button>
+        <!-- O PDF é gerado pelo relatorio_pdf.php com o mesmo período (abre em outra aba) -->
         <a class="botao botao-destaque" href="relatorio_pdf.php?inicio=<?= urlencode($inicio) ?>&fim=<?= urlencode($fim) ?>" target="_blank">
             Baixar PDF
         </a>
     </form>
-    <p class="dica" style="margin:0">
-        Atalhos:
-        <a href="?inicio=<?= date('Y-m-01') ?>&fim=<?= date('Y-m-d') ?>">este mês</a> ·
-        <a href="?inicio=<?= date('Y-m-01', strtotime('first day of last month')) ?>&fim=<?= date('Y-m-t', strtotime('first day of last month')) ?>">mês passado</a> ·
-        <a href="?inicio=<?= date('Y-01-01') ?>&fim=<?= date('Y-m-d') ?>">este ano</a>
-    </p>
 </div>
 
 <h2>Prévia: <?= dataBr($inicio) ?> a <?= dataBr($fim) ?></h2>
 
 <div class="indicadores">
     <div class="indicador">
-        <span>Vendas (ganhos)</span>
+        <span>Vendas</span>
         <strong><?= dinheiro($r['total_vendas']) ?></strong>
-        <small><?= $r['qtd_vendas'] ?> venda(s)</small>
     </div>
     <div class="indicador">
         <span>Gastos</span>
@@ -66,8 +62,8 @@ require '../includes/header.php';
         <strong class="<?= $r['lucro'] >= 0 ? 'positivo' : 'negativo' ?>"><?= dinheiro($r['lucro']) ?></strong>
     </div>
     <div class="indicador">
-        <span>Valor médio por venda</span>
-        <strong><?= dinheiro($r['ticket_medio']) ?></strong>
+        <span>Quantidade de vendas</span>
+        <strong><?= $r['qtd_vendas'] ?></strong>
     </div>
 </div>
 
@@ -94,9 +90,5 @@ require '../includes/header.php';
     </div>
 </div>
 
-<p class="dica" style="margin-top:8px">
-    O envio do relatório não é automático: depois de baixar o PDF, o responsável encaminha
-    para a diretoria/APM pelo meio combinado (por exemplo, e-mail).
-</p>
 
 <?php require '../includes/footer.php'; ?>

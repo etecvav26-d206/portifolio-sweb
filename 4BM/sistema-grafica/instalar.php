@@ -5,6 +5,17 @@
 //  (Faz o mesmo que importar o .sql pelo phpMyAdmin.)
 // =====================================================
 
+// Segurança: esta página apaga e recria o banco, então só funciona
+// no próprio computador onde o XAMPP está rodando (localhost).
+// Quem acessar pela rede da escola não consegue apagar os dados.
+$enderecosLocais = ['127.0.0.1', '::1'];
+if (!in_array($_SERVER['REMOTE_ADDR'] ?? '', $enderecosLocais, true)) {
+    http_response_code(403);
+    die('A instalação só pode ser feita no computador do servidor (localhost).');
+}
+
+// Aqui ainda não existe o banco "grafica", por isso a conexão
+// é feita sem o dbname (diferente do config/conexao.php)
 $host = '127.0.0.1';
 $user = 'root';
 $senha = '';
@@ -29,9 +40,11 @@ if (!$pdo) {
     die('Não foi possível conectar ao MySQL. Ligue o MySQL no painel do XAMPP e recarregue a página.');
 }
 
+// Verifica se o banco já foi criado antes
 $jaExiste = (bool) $pdo->query("SHOW DATABASES LIKE 'grafica'")->fetch();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Se o banco já existe, só reinstala com a caixinha de confirmação marcada
     if ($jaExiste && empty($_POST['confirmo'])) {
         $mensagem = 'Marque a confirmação para reinstalar (os dados atuais serão apagados).';
         $tipo = 'erro';
@@ -43,6 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (strpos(trim($linha), '--') === 0) continue;
             $sql .= $linha;
         }
+        // Cada comando do .sql termina com ";" no fim da linha, então
+        // separamos o texto ali e executamos um comando de cada vez.
+        // (o "\r" é removido porque o Windows usa "\r\n" para quebrar linha)
         foreach (explode(";\n", str_replace("\r", '', $sql)) as $comando) {
             if (trim($comando) !== '') {
                 $pdo->exec($comando);

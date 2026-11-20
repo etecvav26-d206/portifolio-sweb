@@ -6,6 +6,7 @@
 // =====================================================
 require 'includes/funcoes.php';
 
+// Filtros vêm pela URL (método GET), ex.: catalogo.php?categoria=Impressão&busca=banner
 $categoriaEscolhida = $_GET['categoria'] ?? '';
 $busca = trim($_GET['busca'] ?? '');
 
@@ -13,7 +14,10 @@ $busca = trim($_GET['busca'] ?? '');
 $categorias = $pdo->query('SELECT DISTINCT categoria FROM produtos WHERE ativo = 1 ORDER BY categoria')
                   ->fetchAll(PDO::FETCH_COLUMN);
 
-// Busca dos produtos (só ativos)
+// Busca dos produtos (só ativos).
+// O SQL é montado aos poucos: cada filtro usado acrescenta um "AND ... = ?"
+// e o valor vai para o array $params, na mesma ordem dos "?".
+// O estoque é buscado só para saber se está disponível; o número exato não aparece na tela.
 $sql = 'SELECT nome, categoria, tipo, preco, estoque, imagem FROM produtos WHERE ativo = 1';
 $params = [];
 if ($categoriaEscolhida !== '') {
@@ -22,7 +26,7 @@ if ($categoriaEscolhida !== '') {
 }
 if ($busca !== '') {
     $sql .= ' AND nome LIKE ?';
-    $params[] = "%$busca%";
+    $params[] = "%$busca%"; // % = qualquer texto antes/depois ("ban" acha "Banner")
 }
 $sql .= ' ORDER BY categoria, nome';
 $consulta = $pdo->prepare($sql);
@@ -34,12 +38,14 @@ $publico = true;
 require 'includes/header.php';
 ?>
 
+<!-- Topo do catálogo com a foto de fundo (se existir) e a busca -->
 <section class="hero <?= imagem('fachada.jpg') ? 'hero-foto' : '' ?>"
     <?php if (imagem('fachada.jpg')): ?>style="background-image: url('assets/img/fachada.jpg')"<?php endif; ?>>
     <h1>Produtos e serviços</h1>
-    <p class="subtitulo">Impressões, material escolar e personalizados. Consulte o que está disponível agora.</p>
+    <p class="subtitulo">Veja o que a gráfica da escola tem disponível.</p>
 
     <form method="get" style="max-width:420px;margin:0 auto 18px;display:flex;gap:8px">
+        <?php // Campo escondido: mantém a categoria escolhida quando a pessoa faz uma busca ?>
         <?php if ($categoriaEscolhida): ?>
             <input type="hidden" name="categoria" value="<?= e($categoriaEscolhida) ?>">
         <?php endif; ?>
@@ -48,6 +54,7 @@ require 'includes/header.php';
     </form>
 </section>
 
+<!-- Botões de categoria (urlencode deixa o nome seguro para ir na URL) -->
 <div class="categorias">
     <a href="catalogo.php" class="<?= $categoriaEscolhida === '' ? 'ativo' : '' ?>">Todos</a>
     <?php foreach ($categorias as $cat): ?>
@@ -61,6 +68,7 @@ require 'includes/header.php';
     <p class="vazio">Nenhum produto encontrado.</p>
 <?php endif; ?>
 
+<!-- Um cartão para cada produto -->
 <div class="vitrine">
     <?php foreach ($produtos as $p):
         // Serviço está sempre disponível; produto depende do estoque

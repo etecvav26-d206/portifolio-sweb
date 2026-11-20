@@ -3,26 +3,30 @@
    Paleta nas cores da ETEC VAV: preto, vermelho e branco
    ===================================================== */
 
+/* Variáveis de cor: definidas uma vez aqui e usadas no arquivo todo
+   com var(--nome). Para mudar uma cor do site, basta mudar aqui. */
 :root {
-    --tinta: #141414;        /* preto - cor principal */
-    --tinta-2: #2a2a2a;
-    --papel: #f4f4f4;        /* fundo cinza bem claro */
+    --tinta: #141414;            /* preto - cor principal (menu, títulos, botões) */
+    --tinta-2: #2a2a2a;          /* preto um pouco mais claro (hover do menu) */
+    --papel: #f4f4f4;            /* fundo cinza bem claro */
     --branco: #ffffff;
     --borda: #e1e1e1;
     --texto: #222;
-    --texto-suave: #6b6f78;
+    --texto-suave: #6b6f78;      /* textos secundários (subtítulos, dicas) */
 
-    --ciano: #c8102e;         /* vermelho ETEC (cor de destaque) */
-    --magenta: #8f0b20;       /* vermelho escuro */
-    --amarelo: #9a9a9a;       /* cinza */
+    --destaque: #c8102e;         /* vermelho ETEC (cor de destaque) */
+    --destaque-escuro: #8f0b20;  /* vermelho escuro */
+    --cinza: #9a9a9a;            /* cinza médio */
 
-    --verde: #1f9d55;
-    --vermelho: #d64545;
+    --verde: #1f9d55;            /* lucro positivo, "Disponível" */
+    --vermelho: #d64545;         /* prejuízo, "Esgotado", erros */
 
-    --raio: 10px;
+    --raio: 10px;                /* arredondamento dos cantos */
     --sombra: 0 1px 3px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.04);
 }
 
+/* box-sizing: border-box faz a largura incluir o padding e a borda
+   (fica mais fácil acertar tamanhos). margin/padding 0 zera o padrão do navegador. */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -33,14 +37,16 @@ body {
     line-height: 1.5;
 }
 
-a { color: var(--ciano); text-decoration: none; }
+a { color: var(--destaque); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 h1 { font-size: 26px; margin-bottom: 4px; color: var(--tinta); }
 h2 { font-size: 18px; margin-bottom: 14px; color: var(--tinta); }
 .subtitulo { color: var(--texto-suave); margin-bottom: 24px; }
 
-/* ---------- Logo ---------- */
+/* ---------- Logo ----------
+   Quando não há logo.png, o header desenha 4 quadradinhos (.logo-cmyk)
+   em grade 2x2 nas cores do site */
 .logo {
     display: flex; align-items: center; gap: 10px;
     font-weight: 700; font-size: 18px; color: inherit;
@@ -48,19 +54,21 @@ h2 { font-size: 18px; margin-bottom: 14px; color: var(--tinta); }
 .logo:hover { text-decoration: none; }
 .logo-cmyk { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
 .logo-cmyk i { width: 9px; height: 9px; border-radius: 2px; display: block; }
-.logo-cmyk i:nth-child(1) { background: var(--ciano); }
-.logo-cmyk i:nth-child(2) { background: var(--magenta); }
-.logo-cmyk i:nth-child(3) { background: var(--amarelo); }
+.logo-cmyk i:nth-child(1) { background: var(--destaque); }
+.logo-cmyk i:nth-child(2) { background: var(--destaque-escuro); }
+.logo-cmyk i:nth-child(3) { background: var(--cinza); }
 .logo-cmyk i:nth-child(4) { background: #fff; }
 
 /* Logo com imagem real */
 .logo-img { height: 34px; width: auto; }
 
-/* ---------- Layout interno (com menu lateral) ---------- */
+/* ---------- Layout interno (com menu lateral) ----------
+   display: flex coloca o menu e o conteúdo lado a lado.
+   position: sticky deixa o menu parado enquanto a página rola. */
 body.interno { display: flex; min-height: 100vh; }
 
 .menu-lateral {
-    border-right: 4px solid var(--ciano);
+    border-right: 4px solid var(--destaque);
     width: 240px; flex-shrink: 0;
     background: var(--tinta); color: #fff;
     display: flex; flex-direction: column;
@@ -73,7 +81,7 @@ body.interno { display: flex; min-height: 100vh; }
     color: #d2d2d2; padding: 9px 12px; border-radius: 8px;
 }
 .menu-lateral nav a:hover { background: var(--tinta-2); color: #fff; text-decoration: none; }
-.menu-lateral nav a.ativo { background: var(--ciano); color: #fff; font-weight: 600; }
+.menu-lateral nav a.ativo { background: var(--destaque); color: #fff; font-weight: 600; }
 .menu-titulo {
     font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
     color: #8a8a8a; margin: 16px 12px 6px;
@@ -89,17 +97,20 @@ body.interno { display: flex; min-height: 100vh; }
 
 /* ---------- Layout público ---------- */
 .topo-publico {
-    background: var(--tinta); border-bottom: 4px solid var(--ciano);
+    background: var(--tinta); border-bottom: 4px solid var(--destaque);
     padding: 14px 40px; display: flex; justify-content: space-between; align-items: center;
 }
 .topo-publico .logo { color: #fff; }
 .topo-publico nav { display: flex; gap: 18px; align-items: center; }
 .topo-publico nav a:not(.botao) { color: #fff; }
-.topo-publico .botao { background: var(--ciano); }
+.topo-publico .botao { background: var(--destaque); }
 .conteudo-publico { max-width: 1100px; margin: 0 auto; padding: 32px 24px; min-height: 70vh; }
 .rodape-publico { text-align: center; color: var(--texto-suave); padding: 24px; font-size: 13px; }
 
-/* ---------- Cartões e grade ---------- */
+/* ---------- Cartões e grade ----------
+   .cartao = caixa branca usada em quase todas as telas.
+   .grade usa CSS Grid: grade-2 = duas colunas iguais,
+   grade-form = formulário de 360px à esquerda + lista ocupando o resto. */
 .cartao {
     background: var(--branco); border: 1px solid var(--borda);
     border-radius: var(--raio); padding: 22px; box-shadow: var(--sombra);
@@ -109,15 +120,14 @@ body.interno { display: flex; min-height: 100vh; }
 .grade-2 { grid-template-columns: 1fr 1fr; }
 .grade-form { grid-template-columns: 360px 1fr; align-items: start; }
 
-/* Indicadores do painel */
+/* Indicadores do painel
+   repeat(auto-fit, minmax(190px, 1fr)) cria quantas colunas couberem,
+   cada uma com no mínimo 190px; em telas menores elas descem para a linha de baixo. */
 .indicadores { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; margin-bottom: 24px; }
 .indicador {
     background: var(--branco); border: 1px solid var(--borda); border-radius: var(--raio);
-    padding: 18px; box-shadow: var(--sombra); border-top: 4px solid var(--ciano);
+    padding: 18px; box-shadow: var(--sombra);
 }
-.indicador:nth-child(2) { border-top-color: var(--magenta); }
-.indicador:nth-child(3) { border-top-color: var(--amarelo); }
-.indicador:nth-child(4) { border-top-color: var(--tinta); }
 .indicador span { color: var(--texto-suave); font-size: 13px; }
 .indicador strong { display: block; font-size: 24px; color: var(--tinta); margin-top: 4px; }
 .indicador small { color: var(--texto-suave); }
@@ -128,14 +138,14 @@ body.interno { display: flex; min-height: 100vh; }
 .atalhos { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
 .atalho {
     background: var(--branco); border: 1px solid var(--borda); border-radius: var(--raio);
-    padding: 20px; color: var(--texto); box-shadow: var(--sombra); transition: transform .15s;
+    padding: 20px; color: var(--texto); box-shadow: var(--sombra);
 }
-.atalho:hover { transform: translateY(-2px); text-decoration: none; border-color: var(--ciano); }
+.atalho:hover { text-decoration: none; border-color: var(--destaque); }
 .atalho strong { display: block; color: var(--tinta); font-size: 16px; margin-bottom: 4px; }
 .atalho span { color: var(--texto-suave); font-size: 14px; }
 
 /* ---------- Tabelas ---------- */
-.tabela-box { overflow-x: auto; }
+.tabela-box { overflow-x: auto; }   /* no celular a tabela rola para o lado em vez de estourar a tela */
 table { width: 100%; border-collapse: collapse; }
 th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--borda); vertical-align: middle; }
 th { font-size: 12px; text-transform: uppercase; letter-spacing: .5px; color: var(--texto-suave); font-weight: 600; }
@@ -150,7 +160,7 @@ input, select, textarea {
     width: 100%; padding: 9px 11px; border: 1px solid #cfccc2; border-radius: 8px;
     font: inherit; background: #fff; margin-bottom: 14px;
 }
-input:focus, select:focus, textarea:focus { outline: 2px solid var(--ciano); border-color: transparent; }
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--destaque); border-color: transparent; }
 .linha-form { display: flex; gap: 12px; }
 .linha-form > div { flex: 1; }
 .dica { font-size: 13px; color: var(--texto-suave); margin-top: -10px; margin-bottom: 14px; }
@@ -166,23 +176,25 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--ciano); bor
     cursor: pointer; text-align: center;
 }
 .botao:hover { background: var(--tinta-2); text-decoration: none; }
-.botao-destaque { background: var(--ciano); }
+.botao-destaque { background: var(--destaque); }
 .botao-destaque:hover { background: #a50d26; }
 .botao-claro { background: #ecebe5; color: var(--tinta); }
 .botao-claro:hover { background: #e0ded6; }
 .botao-perigo { background: var(--vermelho); }
 .botao-pequeno { padding: 6px 12px; font-size: 13px; }
-.botao-link { background: none; border: none; color: var(--ciano); cursor: pointer; font: inherit; padding: 0; }
+.botao-link { background: none; border: none; color: var(--destaque); cursor: pointer; font: inherit; padding: 0; }
 .botao-link:hover { text-decoration: underline; }
 .acoes { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 form.inline { display: inline; }
 
-/* ---------- Selos (badges) ---------- */
+/* ---------- Selos (badges) ----------
+   Etiquetas arredondadas de situação: verde = ok, amarelo = estoque baixo,
+   vermelho = esgotado/desativado, vermelho cheio = administrador */
 .selo {
     display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: 12px; font-weight: 600;
     background: #ecebe5; color: var(--tinta); width: fit-content;
 }
-.selo-admin { background: var(--ciano); color: #fff; }
+.selo-admin { background: var(--destaque); color: #fff; }
 .selo-ok { background: #dcf3e5; color: var(--verde); }
 .selo-baixo { background: #fff3c4; color: #8a6d00; }
 .selo-esgotado { background: #fbe0e0; color: var(--vermelho); }
@@ -225,6 +237,7 @@ form.inline { display: inline; }
     background-size: cover; background-position: center;
     border-radius: var(--raio); padding: 70px 24px 40px; position: relative; overflow: hidden;
 }
+/* ::before cria uma camada escura por cima da foto para o texto branco ficar legível */
 .hero-foto::before {
     content: ""; position: absolute; inset: 0;
     background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.8));
@@ -240,6 +253,8 @@ form.inline { display: inline; }
 }
 
 /* Fotos dos produtos */
+/* A margem negativa (-18px, igual ao padding do cartão) faz a foto encostar
+   nas bordas do cartão. object-fit: cover corta a foto sem deformar. */
 .produto-foto {
     width: calc(100% + 36px); margin: -18px -18px 8px; height: 160px;
     object-fit: cover; border-radius: var(--raio) var(--raio) 0 0; display: block;
@@ -267,15 +282,17 @@ form.inline { display: inline; }
 .remover { color: var(--vermelho); background: none; border: none; cursor: pointer; font-size: 18px; }
 
 /* Detalhes da venda no histórico */
-details summary { cursor: pointer; color: var(--ciano); }
+details summary { cursor: pointer; color: var(--destaque); }
 details ul { margin: 8px 0 0 18px; font-size: 14px; color: var(--texto-suave); }
 
 /* Barras do painel (produtos mais vendidos) */
 .barra-linha { display: grid; grid-template-columns: 1fr 2fr auto; gap: 10px; align-items: center; margin-bottom: 10px; font-size: 14px; }
 .barra { background: #ecebe5; border-radius: 99px; height: 10px; overflow: hidden; }
-.barra i { display: block; height: 100%; background: var(--ciano); border-radius: 99px; }
+.barra i { display: block; height: 100%; background: var(--destaque); border-radius: 99px; }
 
-/* ---------- Celular / tela pequena ---------- */
+/* ---------- Celular / tela pequena ----------
+   @media: as regras abaixo só valem quando a tela tem até 860px de largura.
+   O menu lateral vira uma barra no topo e as grades viram uma coluna só. */
 @media (max-width: 860px) {
     body.interno { flex-direction: column; }
     .menu-lateral { width: 100%; height: auto; position: static; }

@@ -8,15 +8,19 @@
 
 require_once __DIR__ . '/funcoes.php';
 
+// $raiz serve para montar o caminho certo do login.php:
+//   ''    nas páginas da raiz   -> login.php
+//   '../' nas páginas de admin/ -> ../login.php
 function exigirLogin($raiz = '') {
-    global $pdo;
+    global $pdo; // usa a conexão criada no conexao.php
 
+    // 1) Ninguém logado? Manda para o login.
     if (!usuarioLogado()) {
         avisar('Faça login para acessar o sistema.', 'erro');
         ir($raiz . 'login.php');
     }
 
-    // Confere no banco se a conta continua ativa e se o nível mudou
+    // 2) Confere no banco se a conta continua ativa e se o nível mudou
     // (assim, se o admin desativar alguém, a pessoa perde o acesso na hora)
     $sql = $pdo->prepare('SELECT id, nome, login, nivel, ativo FROM usuarios WHERE id = ?');
     $sql->execute([usuarioLogado()['id']]);
@@ -28,10 +32,13 @@ function exigirLogin($raiz = '') {
         ir($raiz . 'login.php');
     }
 
+    // 3) Atualiza a sessão com os dados mais recentes do banco
     unset($u['ativo']);
     $_SESSION['usuario'] = $u;
 }
 
+// Usada nas páginas de admin/: primeiro exige login,
+// depois bloqueia quem tem nível "funcionario" (requisito 4.1 do plano)
 function exigirAdmin($raiz = '../') {
     exigirLogin($raiz);
     if (!ehAdmin()) {

@@ -7,7 +7,10 @@
 require 'includes/auth.php';
 exigirLogin();
 
+// ---------- Parte 1: salvar a venda (quando clica em "Confirmar venda") ----------
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Chegam dois arrays na mesma ordem, montados pelo JavaScript lá embaixo:
+    // produto_id[] = [3, 7]   quantidade[] = [2, 1]
     $ids         = $_POST['produto_id'] ?? [];
     $quantidades = $_POST['quantidade'] ?? [];
     $observacao  = trim($_POST['observacao'] ?? '');
@@ -68,17 +71,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
+        // Deu tudo certo: confirma todas as alterações de uma vez
         $pdo->commit();
         avisar("Venda nº $vendaId registrada! Total: " . dinheiro($total));
         ir('vendas_historico.php');
 
     } catch (Exception $erro) {
+        // Deu algum problema: desfaz tudo que foi feito nesta venda
         $pdo->rollBack();
         avisar($erro->getMessage(), 'erro');
         ir('vendas_nova.php');
     }
 }
 
+// ---------- Parte 2: montar a tela ----------
 // Produtos que podem ser vendidos (ativos, e com estoque se for produto)
 $produtos = $pdo->query("SELECT id, nome, categoria, tipo, preco, estoque FROM produtos
                          WHERE ativo = 1 AND (tipo = 'servico' OR estoque > 0)
@@ -102,6 +108,8 @@ require 'includes/header.php';
                 <select id="produto">
                     <option value="">Selecione...</option>
                     <?php
+                    // Agrupa as opções por categoria com <optgroup>:
+                    // quando a categoria muda, fecha o grupo anterior e abre um novo
                     $categoriaAtual = null;
                     foreach ($produtos as $p):
                         if ($p['categoria'] !== $categoriaAtual):
@@ -126,6 +134,7 @@ require 'includes/header.php';
         </div>
     </div>
 
+    <!-- O carrinho fica dentro do form: cada item vira campos escondidos (hidden) -->
     <form method="post" class="cartao" id="form-venda">
         <h2>Itens da venda</h2>
         <table>
@@ -150,7 +159,11 @@ require 'includes/header.php';
 </div>
 
 <script>
-// Dados dos produtos vindos do PHP
+// ---------- Parte 3: JavaScript do carrinho ----------
+// O total mostrado aqui é só uma prévia para o funcionário.
+// O valor que vale é recalculado no PHP com o preço do banco.
+
+// Dados dos produtos vindos do PHP (json_encode transforma o array do PHP em objeto JS)
 const produtos = <?= json_encode(array_column($produtos, null, 'id'), JSON_HEX_TAG | JSON_HEX_AMP) ?>;
 let carrinho = {}; // { idProduto: quantidade }
 
@@ -161,10 +174,13 @@ function seguro(texto) {
     return div.innerHTML;
 }
 
+// 12.5 -> "R$ 12,50"
 function formatar(valor) {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
+// Botão "Adicionar": valida e coloca o item no carrinho
+// (se o produto já estiver no carrinho, soma a quantidade)
 function adicionarItem() {
     const id = document.getElementById('produto').value;
     const qtd = parseInt(document.getElementById('quantidade').value);
@@ -185,6 +201,7 @@ function adicionarItem() {
     desenhar();
 }
 
+// Botão "×" da linha: tira o item do carrinho
 function remover(id) {
     delete carrinho[id];
     desenhar();
