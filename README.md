@@ -47,4 +47,13 @@ O objetivo é registrar os projetos criados pelo grupo e praticar conceitos fund
 
 O projeto da pizzaria possui uma página pública para o cliente e três CRUDs administrativos em PHP com PDO/MySQL: pizzas, categorias e depoimentos.
 
+## 📌 Entregas do 4º bimestre
+
+- [Sistema de Gestão para Gráfica — pasta da entrega](4BM/README.md)
+- [Relatório do projeto](4BM/docs/relatorio-projeto.md)
+- [Prints do sistema funcionando](4BM/prints/)
+- [Declaração de uso de IA](4BM/declaracao-uso-de-ia.md)
+
+Sistema web para a gráfica da escola em PHP com PDO/MySQL: catálogo público, estoque, vendas, painel administrativo, gastos, funcionários e relatório em PDF para a diretoria/APM.
+
 ---
