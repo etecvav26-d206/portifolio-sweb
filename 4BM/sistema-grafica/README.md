@@ -26,6 +26,9 @@ As funcionalidades seguem o documento `docs/Plano_Funcionalidades.pdf`.
 4. Se a pasta `config` não tiver o `conexao.php`, copie `conexao.exemplo.php` com o nome `conexao.php`.
 5. Acesse `http://localhost/grafica`.
 
+> O `instalar.php` só funciona no próprio computador onde o XAMPP está rodando (localhost).
+> Assim, ninguém que acesse o sistema pela rede da escola consegue apagar o banco.
+
 ### Usuários de teste
 
 | Login   | Senha     | Nível         |
@@ -85,6 +88,8 @@ grafica/
 - O preço da venda é sempre buscado no banco, nunca no navegador.
 - A venda usa uma transação: a venda, os itens e a baixa no estoque são salvos juntos, ou nada é salvo.
 - Produtos e funcionários são **inativados** em vez de excluídos, para manter o histórico.
+- O upload de foto confere o tipo real da imagem (JPG, PNG ou WEBP) e o tamanho máximo de 3 MB.
+- O instalador do banco só pode ser usado no computador do servidor.
 
 ## Limites desta versão
 
