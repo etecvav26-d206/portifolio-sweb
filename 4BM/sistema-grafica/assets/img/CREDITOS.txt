@@ -1,6 +1,76 @@
 CRÉDITOS DAS FOTOS (licenças livres - é obrigatório citar o autor)
 ====================================================================
 
+produtos/produto_11_commons.jpg  (Caneta Bic preta)
+  "Ballpoint Pen DS" - Augustus Binu - CC BY-SA 3.0
+  Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Ballpoint_Pen_DS.jpg
+  (imagem reduzida para 800 px)
+
+produtos/produto_12_commons.jpg  (Caneta Bic vermelha)
+  "Chatham Marines Cadet Unit red ballpoint pen" - Nigel Osborne - CC BY 4.0
+  Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Chatham_Marines_Cadet_Unit_red_ballpoint_pen.jpg
+  (imagem reduzida para 800 px)
+
+produtos/produto_15_commons.jpg  (Apontadores)
+  "Red pencil sharpener" - Kaldari - Domínio público
+  Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Red_pencil_sharpener.jpg
+  (imagem reduzida para 800 px)
+
+produtos/produto_17_commons.jpg  (Calculadora)
+  "Citizen SLD-100NR calculator" - LoMit - CC BY-SA 4.0
+  Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Citizen_SLD-100NR_calculator.jpg
+  (imagem reduzida para 800 px)
+
+produtos/produto_18_commons.jpg  (Cola bastão pequena)
+  "Glue Stick" - JustKronos - CC0
+  Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Glue_Stick.jpg
+  (imagem reduzida para 800 px)
+
+produtos/produto_19_commons.jpg  (Cola bastão grande)
+  "Glue stick (46244472364)" - Benno Lang - Domínio público
+  Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Glue_stick_(46244472364).jpg
+  (imagem reduzida para 800 px)
+
+produtos/produto_20_commons.jpg  (Cola líquida)
+  "School glue" - Mk2010 - CC BY-SA 3.0
+  Wikimedia Commons: https://commons.wikimedia.org/wiki/File:School_glue.jpg
+  (imagem reduzida para 800 px)
+
+produtos/produto_21_commons.jpg  (Cola quente)
+  "Hot glue gun pro" - ASDFS - CC BY-SA 4.0
+  Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Hot_glue_gun_pro.jpg
+  (imagem reduzida para 800 px)
+
+produtos/produto_22_commons.jpg  (Durex)
+  "Scotch tape dispenser" - Donmike10 - Domínio público
+  Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Scotch_tape_dispenser.jpg
+  (imagem reduzida para 800 px)
+
+produtos/produto_23_commons.jpg  (Corretivo em fita)
+  "Correction tape by Jinuo 20230316 192150" - Wiki Farazi - CC0
+  Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Correction_tape_by_Jinuo_20230316_192150.jpg
+  (imagem reduzida para 800 px)
+
+produtos/produto_24_commons.jpg  (Cadeado)
+  "Solex 99 30 padlock with keys (DSCF2659)" - Trougnouf - CC BY 4.0
+  Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Solex_99_30_padlock_with_keys_(DSCF2659).jpg
+  (imagem reduzida para 800 px)
+
+produtos/produto_27_commons.jpg  (Papel milimetrado)
+  "Graph paper notepad (4562203394)" - Calsidyrose - CC BY 2.0
+  Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Graph_paper_notepad_(4562203394).jpg
+  (imagem reduzida para 800 px)
+
+produtos/produto_29_commons.jpg  (Post-it)
+  "Sticky Notes in different colors" - Ramesh NG - CC BY-SA 2.0
+  Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Sticky_Notes_in_different_colors.jpg
+  (imagem reduzida para 800 px)
+
+produtos/produto_30_commons.jpg  (Régua acrílica)
+  "Plastic ruler" - Corn cheese - CC0
+  Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Plastic_ruler.jpg
+  (imagem reduzida para 800 px)
+
 fachada.jpg  (fundo do catálogo e do login)
   Foto da fachada da ETEC Vasco Antônio Venchiarutti, escolhida pelo grupo.
 
