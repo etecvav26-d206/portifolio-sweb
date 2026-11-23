@@ -101,40 +101,66 @@ INSERT INTO usuarios (nome, login, senha, nivel) VALUES
 ('Maria Souza',   'maria', '$2y$10$30gh2LL5lgdiU4UJS0lPweMIziJM.YELog/Y4fjDESdmfvocUs0LK', 'funcionario');
 
 INSERT INTO produtos (nome, categoria, tipo, preco, estoque, estoque_minimo) VALUES
-('Caderno universitário 10 matérias', 'Material escolar', 'produto', 24.90, 30, 5),
-('Caneta esferográfica azul',         'Material escolar', 'produto',  2.50, 120, 20),
-('Lápis preto nº 2',                  'Material escolar', 'produto',  1.50, 80, 20),
-('Borracha branca',                   'Material escolar', 'produto',  1.80, 4, 10),
-('Pasta catálogo 50 folhas',          'Material escolar', 'produto', 14.00, 12, 5),
-('Resma papel A4 500 folhas',         'Papelaria',        'produto', 32.00, 3, 5),
-('Camiseta personalizada',            'Personalizados',   'produto', 45.00, 18, 5),
-('Caneca personalizada',              'Personalizados',   'produto', 30.00, 0, 3),
-('Impressão P&B (por folha)',         'Impressão',        'servico',  0.50, 0, 0),
-('Impressão colorida (por folha)',    'Impressão',        'servico',  2.00, 0, 0),
-('Encadernação espiral',              'Acabamento',       'servico',  8.00, 0, 0),
-('Plastificação A4',                  'Acabamento',       'servico',  5.00, 0, 0),
-('Banner 60x90 cm',                   'Impressão',        'servico', 55.00, 0, 0);
+('Cópia A4 colorida',                   'Cópias e impressões', 'servico',  1.00, 0, 0),
+('Cópia A4 branca e preta',             'Cópias e impressões', 'servico',  0.50, 0, 0),
+('Impressão colorida',                  'Cópias e impressões', 'servico',  1.00, 0, 0),
+('Impressão branca e preta',            'Cópias e impressões', 'servico',  0.50, 0, 0),
+('Encadernação A4 até 100 folhas',      'Acabamento',          'servico',  6.00, 0, 0),
+('Encadernação A3',                     'Acabamento',          'servico',  8.00, 0, 0),
+('Plastificação A4',                    'Acabamento',          'servico',  4.00, 0, 0),
+('Plastificação de documentos',         'Acabamento',          'servico',  2.50, 0, 0),
+('Caderno 10 matérias',                 'Material escolar',    'produto', 20.00, 30, 5),
+('Caneta Bic azul',                     'Material escolar',    'produto',  2.00, 120, 20),
+('Caneta Bic preta',                    'Material escolar',    'produto',  2.00, 100, 20),
+('Caneta Bic vermelha',                 'Material escolar',    'produto',  2.00, 80, 20),
+('Lápis HB nº 02',                      'Material escolar',    'produto',  1.00, 80, 20),
+('Borracha branca pequena',             'Material escolar',    'produto',  2.00, 4, 10),
+('Apontador com reserva',               'Material escolar',    'produto',  4.00, 25, 5),
+('Apontador sem reserva',               'Material escolar',    'produto',  2.00, 40, 10),
+('Calculadora',                         'Material escolar',    'produto', 12.00, 10, 3),
+('Cola bastão pequena',                 'Cola e fitas',        'produto',  4.00, 30, 5),
+('Cola bastão grande',                  'Cola e fitas',        'produto',  5.00, 20, 5),
+('Cola líquida pequena',                'Cola e fitas',        'produto',  4.00, 25, 5),
+('Bastão de cola quente',               'Cola e fitas',        'produto',  3.50, 15, 5),
+('Durex pequeno',                       'Cola e fitas',        'produto',  4.00, 20, 5),
+('Corretivo em fita',                   'Material escolar',    'produto',  8.00, 12, 4),
+('Cadeado',                             'Diversos',            'produto',  8.00, 8, 2),
+('Pasta plástica com elástico pequena', 'Papelaria',           'produto',  6.00, 12, 5),
+('Papel sulfite A4 branca ou colorida', 'Papelaria',           'produto',  0.10, 3, 5),
+('Papel milimetrado A4',                'Papelaria',           'produto',  0.50, 60, 10),
+('Papel canson A4',                     'Papelaria',           'produto',  1.00, 50, 10),
+('Post-it',                             'Papelaria',           'produto',  5.00, 18, 5),
+('Régua acrílica 30 cm',                'Material escolar',    'produto',  5.00, 15, 5);
 
 -- Algumas vendas de exemplo nos últimos dias
 -- (DATE_SUB(NOW(), INTERVAL 6 DAY) = 6 dias antes da instalação,
 --  assim o painel sempre tem dados do mês na apresentação)
 INSERT INTO vendas (usuario_id, total, data_venda) VALUES
-(2, 54.80, DATE_SUB(NOW(), INTERVAL 6 DAY)),
+(2, 44.00, DATE_SUB(NOW(), INTERVAL 6 DAY)),
 (2, 25.00, DATE_SUB(NOW(), INTERVAL 5 DAY)),
-(1, 90.00, DATE_SUB(NOW(), INTERVAL 4 DAY)),
+(1, 56.00, DATE_SUB(NOW(), INTERVAL 4 DAY)),
 (2, 38.00, DATE_SUB(NOW(), INTERVAL 3 DAY)),
-(2, 165.00, DATE_SUB(NOW(), INTERVAL 2 DAY)),
-(1, 135.00, DATE_SUB(NOW(), INTERVAL 1 DAY));
+(2, 100.00, DATE_SUB(NOW(), INTERVAL 2 DAY)),
+(1, 132.00, DATE_SUB(NOW(), INTERVAL 1 DAY));
 
 INSERT INTO itens_venda (venda_id, produto_id, quantidade, preco_unitario, subtotal) VALUES
-(1, 1, 2, 24.90, 49.80),
-(1, 2, 2,  2.50,  5.00),
-(2, 9, 50, 0.50, 25.00),
-(3, 7, 2, 45.00, 90.00),
-(4, 10, 15, 2.00, 30.00),
-(4, 11, 1,  8.00,  8.00),
-(5, 13, 3, 55.00, 165.00),
-(6, 7, 3, 45.00, 135.00);
+(1, 9, 2, 20.00, 40.00),
+(1, 10, 2, 2.00,  4.00),
+(2, 4, 50, 0.50, 25.00),
+(3, 17, 2, 12.00, 24.00),
+(3, 9, 1, 20.00, 20.00),
+(3, 24, 1, 8.00,  8.00),
+(3, 15, 1, 4.00,  4.00),
+(4, 3, 30, 1.00, 30.00),
+(4, 5, 1,  6.00,  6.00),
+(4, 10, 1, 2.00,  2.00),
+(5, 7, 10, 4.00, 40.00),
+(5, 6, 5,  8.00, 40.00),
+(5, 1, 20, 1.00, 20.00),
+(6, 17, 5, 12.00, 60.00),
+(6, 9, 3, 20.00, 60.00),
+(6, 23, 1, 8.00,  8.00),
+(6, 20, 1, 4.00,  4.00);
 
 UPDATE vendas SET observacao = 'Trabalho de escola - cliente volta para buscar' WHERE id = 4;
 
@@ -144,16 +170,17 @@ INSERT INTO gastos (descricao, valor, categoria, data_gasto, usuario_id) VALUES
 ('Manutenção da impressora laser',      60.00,  'Manutenção',  DATE_SUB(CURDATE(), INTERVAL 1 DAY), 1);
 
 -- Fotos dos produtos (arquivos em assets/img/produtos/)
-UPDATE produtos SET imagem = 'produto_1_1795099729.jpg'  WHERE id = 1;
-UPDATE produtos SET imagem = 'produto_2_1795099730.jpg'  WHERE id = 2;
-UPDATE produtos SET imagem = 'produto_3_1795099730.jpg'  WHERE id = 3;
-UPDATE produtos SET imagem = 'produto_4_1795099730.jpg'  WHERE id = 4;
-UPDATE produtos SET imagem = 'produto_5_1795099730.jpg'  WHERE id = 5;
-UPDATE produtos SET imagem = 'produto_6_1795099730.jpg'  WHERE id = 6;
-UPDATE produtos SET imagem = 'produto_7_1795228822.jpg'  WHERE id = 7;
-UPDATE produtos SET imagem = 'produto_8_1795228822.jpg'  WHERE id = 8;
-UPDATE produtos SET imagem = 'produto_9_1795099730.jpg'  WHERE id = 9;
-UPDATE produtos SET imagem = 'produto_10_1795099730.jpg' WHERE id = 10;
-UPDATE produtos SET imagem = 'produto_11_1795099730.jpg' WHERE id = 11;
-UPDATE produtos SET imagem = 'produto_12_1795099730.jpg' WHERE id = 12;
-UPDATE produtos SET imagem = 'produto_13_1795228822.jpg' WHERE id = 13;
+UPDATE produtos SET imagem = 'produto_10_1795099730.jpg' WHERE id = 1;
+UPDATE produtos SET imagem = 'produto_9_1795099730.jpg' WHERE id = 2;
+UPDATE produtos SET imagem = 'produto_10_1795099730.jpg' WHERE id = 3;
+UPDATE produtos SET imagem = 'produto_9_1795099730.jpg' WHERE id = 4;
+UPDATE produtos SET imagem = 'produto_11_1795099730.jpg' WHERE id = 5;
+UPDATE produtos SET imagem = 'produto_11_1795099730.jpg' WHERE id = 6;
+UPDATE produtos SET imagem = 'produto_12_1795099730.jpg' WHERE id = 7;
+UPDATE produtos SET imagem = 'produto_12_1795099730.jpg' WHERE id = 8;
+UPDATE produtos SET imagem = 'produto_1_1795099729.jpg' WHERE id = 9;
+UPDATE produtos SET imagem = 'produto_2_1795099730.jpg' WHERE id = 10;
+UPDATE produtos SET imagem = 'produto_3_1795099730.jpg' WHERE id = 13;
+UPDATE produtos SET imagem = 'produto_4_1795099730.jpg' WHERE id = 14;
+UPDATE produtos SET imagem = 'produto_5_1795099730.jpg' WHERE id = 25;
+UPDATE produtos SET imagem = 'produto_6_1795099730.jpg' WHERE id = 26;
